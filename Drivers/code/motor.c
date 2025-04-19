@@ -1,5 +1,4 @@
-#include "main.h"
-#include "tim.h"
+#include "headerfile.h"
 
 int32_t motor_counter_1 = 0;
 int32_t motor_counter_2 = 0;

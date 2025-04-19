@@ -1,4 +1,4 @@
-#include "main.h"
+#include "headerfile.h"
 
 // 初始化MPU6050
 // 返回值:0,成功

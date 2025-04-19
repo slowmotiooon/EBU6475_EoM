@@ -1,5 +1,4 @@
-#include "main.h"
-#include "gpio.h"
+#include "headerfile.h"
 #include "oled_font.h"
 
 #define OLED_W_SCL(x)		HAL_GPIO_WritePin(OLED_SCL_GPIO_Port, OLED_SCL_Pin, (GPIO_PinState)(x))
