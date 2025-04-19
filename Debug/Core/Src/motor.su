@@ -1,0 +1,7 @@
+../Core/Src/motor.c:10:6:Motor_Init	8	static
+../Core/Src/motor.c:17:6:Motor_SetSpeed	16	static
+../Core/Src/motor.c:24:6:Motor_GetCounter	4	static
+../Core/Src/motor.c:29:6:Motor_GetSpeed	4	static
+../Core/Src/motor.c:36:6:Motor_SetDirection	16	static
+../Core/Src/motor.c:56:6:Motor_Stop	8	static
+../Core/Src/motor.c:63:6:HAL_TIM_PeriodElapsedCallback	16	static
