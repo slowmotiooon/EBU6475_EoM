@@ -1,6 +1,7 @@
 #ifndef __MPU6050_H
 #define __MPU6050_H
 #include "IIC.h"
+#include "stm32f4xx_hal.h"
 
 #define delay_ms HAL_Delay
 #define MPU_IIC_Init IIC_GPIO_Init
