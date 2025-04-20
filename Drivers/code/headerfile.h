@@ -18,7 +18,7 @@
 #include "inv_mpu_dmp_motion_driver.h"
 #include "mpu6050.h"
 #include "usart.h"
-
-extern float pitch, roll, yaw;
+#include "sr04.h"
+#include "interrupt.h"
 
 #endif //HEADERFILE_H

@@ -17,6 +17,8 @@ void Motor_Init(void);
 
 void Motor_SetSpeed(int speed);
 
+void Motor_GetSpeed();
+
 void Motor_GetCounter();
 
 void Motor_SetDirection(const uint8_t wheel, const uint8_t direction);

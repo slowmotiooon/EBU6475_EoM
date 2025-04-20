@@ -74,6 +74,11 @@ void Error_Handler(void);
 #define MPU_INT_Pin GPIO_PIN_10
 #define MPU_INT_GPIO_Port GPIOA
 #define MPU_INT_EXTI_IRQn EXTI15_10_IRQn
+#define SR04_ECHO_Pin GPIO_PIN_11
+#define SR04_ECHO_GPIO_Port GPIOA
+#define SR04_ECHO_EXTI_IRQn EXTI15_10_IRQn
+#define SR04_TRIG_Pin GPIO_PIN_12
+#define SR04_TRIG_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14

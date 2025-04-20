@@ -51,6 +51,9 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SR04_TRIG_GPIO_Port, SR04_TRIG_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, MPU_SCL_Pin|MPU_SDA_Pin|OLED_SDA_Pin|OLED_SCL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : MPU_INT_Pin */
@@ -58,6 +61,19 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(MPU_INT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SR04_ECHO_Pin */
+  GPIO_InitStruct.Pin = SR04_ECHO_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(SR04_ECHO_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SR04_TRIG_Pin */
+  GPIO_InitStruct.Pin = SR04_TRIG_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(SR04_TRIG_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MPU_SCL_Pin MPU_SDA_Pin */
   GPIO_InitStruct.Pin = MPU_SCL_Pin|MPU_SDA_Pin;

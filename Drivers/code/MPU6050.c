@@ -1,5 +1,7 @@
 #include "headerfile.h"
 
+float pitch, roll, yaw;
+
 // 初始化MPU6050
 // 返回值:0,成功
 //     其他,错误代码
@@ -226,13 +228,4 @@ uint8_t MPU_Read_Byte(uint8_t reg) {
     MPU_IIC_Stop(); // 产生一个停止条件
     return res;
 }
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-    if (GPIO_Pin == GPIO_PIN_10)
-    {
-        mpu_dmp_get_data(&pitch, &roll, &yaw);
-    }
-}
-
 

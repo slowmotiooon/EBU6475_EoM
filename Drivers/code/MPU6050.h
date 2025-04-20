@@ -88,20 +88,28 @@
 // #define MPU_READ    0XD1
 // #define MPU_WRITE   0XD0
 
-uint8_t MPU_Init(void);                                                      // 初始化MPU6050
+extern float pitch, roll, yaw; // 角度值
+
+uint8_t MPU_Init(void); // 初始化MPU6050
 uint8_t MPU_Write_Len(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *buf); // IIC连续写
-uint8_t MPU_Read_Len(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *buf);  // IIC连续读
-uint8_t MPU_Write_Byte(uint8_t reg, uint8_t data);                           // IIC写一个字节
-uint8_t MPU_Read_Byte(uint8_t reg);                                          // IIC读一个字节
+uint8_t MPU_Read_Len(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *buf); // IIC连续读
+uint8_t MPU_Write_Byte(uint8_t reg, uint8_t data); // IIC写一个字节
+uint8_t MPU_Read_Byte(uint8_t reg); // IIC读一个字节
 
 uint8_t MPU_Set_Gyro_Fsr(uint8_t fsr);
+
 uint8_t MPU_Set_Accel_Fsr(uint8_t fsr);
+
 uint8_t MPU_Set_LPF(uint16_t lpf);
+
 uint8_t MPU_Set_Rate(uint16_t rate);
+
 uint8_t MPU_Set_Fifo(uint8_t sens);
 
 short MPU_Get_Temperature(void);
+
 uint8_t MPU_Get_Gyroscope(short *gx, short *gy, short *gz);
+
 uint8_t MPU_Get_Accelerometer(short *ax, short *ay, short *az);
 
 #endif

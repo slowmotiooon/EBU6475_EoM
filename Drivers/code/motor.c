@@ -59,8 +59,4 @@ void Motor_Stop() {
     HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    if (htim == &htim4) {
-        Motor_GetSpeed();
-    }
-}
+
