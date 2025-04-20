@@ -22,7 +22,7 @@
 #define _INV_MPU_H_
 
 //��������ٶ�
-#define DEFAULT_MPU_HZ  (100)		//100Hz
+#define DEFAULT_MPU_HZ  (200)		//200Hz
 
 #define INV_X_GYRO      (0x40)
 #define INV_Y_GYRO      (0x20)

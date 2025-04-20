@@ -19,4 +19,6 @@
 #include "mpu6050.h"
 #include "usart.h"
 
+extern float pitch, roll, yaw;
+
 #endif //HEADERFILE_H

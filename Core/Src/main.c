@@ -96,11 +96,14 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim4);
-  Motor_Init();
   OLED_Init();
   MPU_Init();
   mpu_dmp_init();
+  HAL_Delay(3000);
+  HAL_TIM_Base_Start_IT(&htim4);
+  Motor_Init();
+
+
 
 
   /* USER CODE END 2 */
@@ -112,10 +115,7 @@ int main(void)
     // speed == 65 ? speed = 65 : speed++;
     // HAL_Delay(1000);
 
-
-    mpu_dmp_get_data(&pitch, &roll, &yaw);
     OLED_Update();
-
 
     // sprintf((char*)message, "c1: %ld   ", motor_counter_1);
     // OLED_ShowString(3, 1, (char*)message);

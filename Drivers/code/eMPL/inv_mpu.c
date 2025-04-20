@@ -2882,6 +2882,7 @@ uint8_t run_self_test(void)
         gyro[2] = (long)(gyro[2] * sens);
         dmp_set_gyro_bias(gyro);
         mpu_get_accel_sens(&accel_sens);
+        accel_sens = 0; //取消重力校准
         accel[0] *= accel_sens;
         accel[1] *= accel_sens;
         accel[2] *= accel_sens;
@@ -2962,7 +2963,7 @@ uint8_t mpu_dmp_init(void)
         res=dmp_set_fifo_rate(DEFAULT_MPU_HZ);	//����DMP�������(��󲻳���200Hz)
         if(res)return 7;
         res=run_self_test();		//�Լ�
-//        if(res)return 8;
+        // if(res)return 8;
         res=mpu_set_dmp_state(1);	//ʹ��DMP
         if(res)return 9;
     } else return 10;

@@ -104,8 +104,4 @@ short MPU_Get_Temperature(void);
 uint8_t MPU_Get_Gyroscope(short *gx, short *gy, short *gz);
 uint8_t MPU_Get_Accelerometer(short *ax, short *ay, short *az);
 
-extern float pitch, roll, yaw;
-extern char send_buff[20];
-void get_motion(void);
-
 #endif
