@@ -101,7 +101,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   OLED_Init();
   mpu6500_init();
-  HAL_TIM_Base_Start_IT(&htim4);
+  HAL_TIM_Base_Start_IT(&htim4); //50ms
   Motor_Init();
 
   /* USER CODE END 2 */
