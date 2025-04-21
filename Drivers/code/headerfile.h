@@ -7,6 +7,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "spi.h"
+#include "dma.h"
 
 #include "motor.h"
 #include "stdio.h"
@@ -17,7 +18,6 @@
 #include "interface.h"
 #include "usart.h"
 #include "sr04.h"
-#include "interrupt.h"
 #include "mpu6500.h"
 #include "bsp_spi.h"
 #include "struct_typedef.h"
