@@ -31,17 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "motor.h"
-#include "stdio.h"
-#include "stdint.h"
-#include "string.h"
-#include "oled.h"
-#include "interface.h"
-#include "iic.h"
-#include "inv_mpu.h"
-#include "inv_mpu_dmp_motion_driver.h"
-#include "mpu6050.h"
-#include "usart.h"
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -71,9 +61,8 @@ void Error_Handler(void);
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
-#define MPU_INT_Pin GPIO_PIN_10
-#define MPU_INT_GPIO_Port GPIOA
-#define MPU_INT_EXTI_IRQn EXTI15_10_IRQn
+#define SPI_NS_Pin GPIO_PIN_10
+#define SPI_NS_GPIO_Port GPIOB
 #define SR04_ECHO_Pin GPIO_PIN_11
 #define SR04_ECHO_GPIO_Port GPIOA
 #define SR04_ECHO_EXTI_IRQn EXTI15_10_IRQn
@@ -85,13 +74,9 @@ void Error_Handler(void);
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
-#define MPU_SCL_Pin GPIO_PIN_4
-#define MPU_SCL_GPIO_Port GPIOB
-#define MPU_SDA_Pin GPIO_PIN_5
-#define MPU_SDA_GPIO_Port GPIOB
-#define OLED_SDA_Pin GPIO_PIN_6
+#define OLED_SDA_Pin GPIO_PIN_8
 #define OLED_SDA_GPIO_Port GPIOB
-#define OLED_SCL_Pin GPIO_PIN_7
+#define OLED_SCL_Pin GPIO_PIN_9
 #define OLED_SCL_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
