@@ -1,6 +1,6 @@
 #include "headerfile.h"
 
-#define CPU_FREQUENCY_MHZ    72		// STM32时钟主频
+#define CPU_FREQUENCY_MHZ    84		// STM32时钟主频
 
 uint16_t count;
 float distance;
