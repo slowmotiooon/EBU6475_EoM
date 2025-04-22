@@ -13,6 +13,7 @@
 #include "stdio.h"
 #include "stdint.h"
 #include "string.h"
+#include "stdlib.h"
 #include "math.h"
 #include "oled.h"
 #include "interface.h"
@@ -21,5 +22,6 @@
 #include "mpu6500.h"
 #include "bsp_spi.h"
 #include "struct_typedef.h"
+#include "pid.h"
 
 #endif //HEADERFILE_H

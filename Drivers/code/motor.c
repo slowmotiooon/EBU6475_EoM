@@ -1,35 +1,33 @@
 #include "headerfile.h"
 
-int32_t motor_counter_1 = 0;
-int32_t motor_counter_2 = 0;
+// int32_t motor_counter_1 = 0;
+// int32_t motor_counter_2 = 0;
 
-int32_t motor_speed_1 = 0;
-int32_t motor_speed_2 = 0;
+int32_t speed_0 = 0;
+int32_t speed_1 = 0;
 
 void Motor_Init(void) {
-    Motor_SetDirection(0, 1);
-    Motor_SetDirection(1, 1);
+    Motor_SetDirection(LEFT_WHEEL, FORWARD);
+    Motor_SetDirection(RIGHT_WHEEL, FORWARD);
     HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
     HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 }
 
-void Motor_SetSpeed(int speed) {
-    if (speed > 99) speed = 99;
-    if (speed < 0) speed = 0;
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, speed);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, speed);
-}
+// void Motor_GetCounter() {
+//     motor_counter_1 = (short) __HAL_TIM_GET_COUNTER(&htim2);
+//     motor_counter_2 = (short) __HAL_TIM_GET_COUNTER(&htim3);
+// }
 
-void Motor_GetCounter() {
-    motor_counter_1 = (short) __HAL_TIM_GET_COUNTER(&htim2);
-    motor_counter_2 = (short) __HAL_TIM_GET_COUNTER(&htim3);
-}
-
-void Motor_GetSpeed() {
-    motor_speed_1 = (short) __HAL_TIM_GET_COUNTER(&htim2);
-    __HAL_TIM_SET_COUNTER(&htim2, 0);
-    motor_speed_2 = (short) __HAL_TIM_GET_COUNTER(&htim3);
-    __HAL_TIM_SET_COUNTER(&htim3, 0);
+void speed_limit(uint32_t *speed)
+{
+    if (*speed > 839)
+    {
+        *speed = 839;
+    }
+    if (*speed < 420)
+    {
+        *speed = 420;
+    }
 }
 
 void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
@@ -52,11 +50,45 @@ void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
     }
 }
 
-void Motor_Stop() {
+void Motor_Stop(void) {
     HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
     HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
     HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
     HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
+}
+
+void GetSpeed(void) {
+    speed_0 = -(short) __HAL_TIM_GET_COUNTER(&htim2);
+    __HAL_TIM_SET_COUNTER(&htim2, 0);
+    speed_1 = (short) __HAL_TIM_GET_COUNTER(&htim3);
+    __HAL_TIM_SET_COUNTER(&htim3, 0);
+}
+
+void Motor_SetSpeed(int32_t speed0, int32_t speed1)
+{
+    if (speed0 >= 0)
+    {
+        Motor_SetDirection(LEFT_WHEEL, FORWARD);
+    }
+    else
+    {
+        Motor_SetDirection(LEFT_WHEEL, BACKWARD);
+        speed0 = abs(speed0);
+    }
+    speed_limit((uint32_t *)&speed0);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, speed0);
+
+    if (speed1 >= 0)
+    {
+        Motor_SetDirection(RIGHT_WHEEL, FORWARD);
+    }
+    else
+    {
+        Motor_SetDirection(RIGHT_WHEEL, BACKWARD);
+        speed1 = abs(speed1);
+    }
+    speed_limit((uint32_t *)&speed1);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, speed1);
 }
 
 
