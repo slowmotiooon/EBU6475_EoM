@@ -158,7 +158,6 @@ void AppTask_CarControl(void *argument)
   /* Infinite loop */
   for(;;)
   {
-
     vTaskDelay(10);
   }
   /* USER CODE END AppTask_CarControl */

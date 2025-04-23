@@ -7,10 +7,10 @@ int target_turn;
 
 float med_angle; //平衡时角度值偏移量
 
-float vertical_kp;
-float vertical_kd;
-float velocity_kp;
-float velocity_ki;
+float vertical_kp; //0-1000
+float vertical_kd; //0-10
+float velocity_kp; // 0-1
+float velocity_ki; // velocity_kp / 200
 float turn_kp;
 float turn_kd;
 uint8_t stop;
@@ -27,17 +27,23 @@ float velocity(int target, int encoder_L, int encoder_R)
 {
     static int err_lowout_last, encoder_s;
     static float a = 0.7;
+    velocity_ki = velocity_kp / 200;
     int err, err_lowout;
+    //计算偏差值
     err = (encoder_L + encoder_R) / 2 - target;
+    //低通滤波
     err_lowout = (1 - a) * err + a * err_lowout_last;
     err_lowout_last = err_lowout;
+    //积分
     encoder_s += err_lowout;
+    //积分限幅
     encoder_s = encoder_s > 20000 ? 20000 : (encoder_s < (-20000) ? (-20000) : encoder_s);
     if (stop == 1)
     {
         encoder_s = 0;
         stop = 0;
     }
+    //速度环计算
     float temp = velocity_kp * err_lowout + velocity_ki * encoder_s;
     return temp;
 }

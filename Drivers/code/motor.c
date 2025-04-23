@@ -32,7 +32,7 @@ void speed_limit(uint32_t *speed)
 
 void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
     if (wheel == LEFT_WHEEL) {
-        if (direction == FORWARD) {
+        if (direction == BACKWARD) {
             HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
             HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
         } else {
@@ -40,7 +40,7 @@ void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
             HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
         }
     } else {
-        if (direction == FORWARD) {
+        if (direction == BACKWARD) {
             HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
             HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
         } else {
@@ -58,9 +58,9 @@ void Motor_Stop(void) {
 }
 
 void GetSpeed(void) {
-    speed_0 = -(short) __HAL_TIM_GET_COUNTER(&htim2);
+    speed_1 = -(short) __HAL_TIM_GET_COUNTER(&htim2);
     __HAL_TIM_SET_COUNTER(&htim2, 0);
-    speed_1 = (short) __HAL_TIM_GET_COUNTER(&htim3);
+    speed_0 = (short) __HAL_TIM_GET_COUNTER(&htim3);
     __HAL_TIM_SET_COUNTER(&htim3, 0);
 }
 
@@ -76,7 +76,7 @@ void Motor_SetSpeed(int32_t speed0, int32_t speed1)
         speed0 = abs(speed0);
     }
     speed_limit((uint32_t *)&speed0);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, speed0);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, speed0);
 
     if (speed1 >= 0)
     {
@@ -88,7 +88,7 @@ void Motor_SetSpeed(int32_t speed0, int32_t speed1)
         speed1 = abs(speed1);
     }
     speed_limit((uint32_t *)&speed1);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, speed1);
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, speed1);
 }
 
 
