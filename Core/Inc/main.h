@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BLUE_STATE_Pin GPIO_PIN_13
+#define BLUE_STATE_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
@@ -74,6 +76,10 @@ void Error_Handler(void);
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
+#define BLUE_TX_Pin GPIO_PIN_6
+#define BLUE_TX_GPIO_Port GPIOB
+#define BLUE_RX_Pin GPIO_PIN_7
+#define BLUE_RX_GPIO_Port GPIOB
 #define OLED_SDA_Pin GPIO_PIN_8
 #define OLED_SDA_GPIO_Port GPIOB
 #define OLED_SCL_Pin GPIO_PIN_9

@@ -56,6 +56,12 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(SR04_TRIG_GPIO_Port, SR04_TRIG_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin : BLUE_STATE_Pin */
+  GPIO_InitStruct.Pin = BLUE_STATE_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BLUE_STATE_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : SPI_NS_Pin */
   GPIO_InitStruct.Pin = SPI_NS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
