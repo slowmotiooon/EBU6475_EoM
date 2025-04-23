@@ -8,6 +8,7 @@
 #include "gpio.h"
 #include "spi.h"
 #include "dma.h"
+#include "adc.h"
 
 #include "motor.h"
 #include "stdio.h"

@@ -140,7 +140,7 @@ void AppTask_OLED(void *argument)
   for(;;)
   {
     OLED_Update();
-    vTaskDelay(50);
+    vTaskDelay(100);
   }
   /* USER CODE END AppTask_OLED */
 }
@@ -158,7 +158,8 @@ void AppTask_CarControl(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    vTaskDelay(10);
+    control();
+    vTaskDelay(5);
   }
   /* USER CODE END AppTask_CarControl */
 }

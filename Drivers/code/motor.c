@@ -24,9 +24,9 @@ void speed_limit(uint32_t *speed)
     {
         *speed = 839;
     }
-    if (*speed < 420)
+    if (*speed < 350)
     {
-        *speed = 420;
+        *speed = 350;
     }
 }
 
