@@ -159,7 +159,7 @@ void AppTask_CarControl(void *argument)
   for(;;)
   {
 
-    vTaskDelay(20);
+    vTaskDelay(10);
   }
   /* USER CODE END AppTask_CarControl */
 }

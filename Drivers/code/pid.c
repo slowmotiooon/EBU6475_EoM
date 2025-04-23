@@ -5,7 +5,7 @@
 int target_speed;
 int target_turn;
 
-float med_angle;
+float med_angle; //平衡时角度值偏移量
 
 float vertical_kp;
 float vertical_kd;
@@ -15,17 +15,19 @@ float turn_kp;
 float turn_kd;
 uint8_t stop;
 
-int vertical(float med, float angel, float gyro_x)
+float velocity_out, vertical_out, turn_out, PWM_out;
+
+float vertical(float med, float angel, float gyro_y)
 {
-    int temp = vertical_kp * (angel - med) + vertical_kd * gyro_x;
+    float temp = vertical_kp * (angel - med) + vertical_kd * gyro_y;
     return temp;
 }
 
-int velocity(int target, int encoder_L, int encoder_R)
+float velocity(int target, int encoder_L, int encoder_R)
 {
     static int err_lowout_last, encoder_s;
     static float a = 0.7;
-    int err, err_lowout, temp;
+    int err, err_lowout;
     err = (encoder_L + encoder_R) / 2 - target;
     err_lowout = (1 - a) * err + a * err_lowout_last;
     err_lowout_last = err_lowout;
@@ -36,27 +38,27 @@ int velocity(int target, int encoder_L, int encoder_R)
         encoder_s = 0;
         stop = 0;
     }
-    temp = velocity_kp * err + velocity_ki * encoder_s;
+    float temp = velocity_kp * err_lowout + velocity_ki * encoder_s;
     return temp;
 }
 
-int turn(float gyro_z, int target_turn)
+float turn(int gyro_z, int target_turn)
 {
-    int temp = turn_kp * target_turn + turn_kd * gyro_z;
+    float temp = turn_kp * target_turn + turn_kd * gyro_z;
     return temp;
 }
 
 void control(void)
 {
-    float pitch = imu.pit;
+    float roll = imu.rol;
     short gyroy = mpu_data.gy;
     short gyroz = mpu_data.gz;
 
-    int velocity_out = velocity(target_speed, speed_0, speed_1);
-    int vertical_out = vertical(velocity_out + med_angle, pitch, gyroy);
-    int turn_out = turn(gyroz, target_turn);
+    velocity_out = velocity(target_speed, speed_0, speed_1);
+    vertical_out = vertical(velocity_out + med_angle, roll, gyroy);
+    turn_out = turn(gyroz, target_turn);
 
-    int PWM_out = vertical_out;
+    PWM_out = vertical_out;
 
     int motor0 = PWM_out - turn_out;
     int motor1 = PWM_out + turn_out;
