@@ -17,9 +17,9 @@ uint8_t stop;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
 
-float vertical(float med, float angel, float gyro_y)
+float vertical(float med, float angel, float gyro_x)
 {
-    float temp = vertical_kp * (angel - med) + vertical_kd * gyro_y;
+    float temp = vertical_kp * (angel - med) + vertical_kd * gyro_x;
     return temp;
 }
 
@@ -51,11 +51,11 @@ float turn(int gyro_z, int target_turn)
 void control(void)
 {
     float roll = imu.rol;
-    short gyroy = mpu_data.gy;
+    short gyrox = mpu_data.gx;
     short gyroz = mpu_data.gz;
 
     velocity_out = velocity(target_speed, speed_0, speed_1);
-    vertical_out = vertical(velocity_out + med_angle, roll, gyroy);
+    vertical_out = vertical(velocity_out + med_angle, roll, gyrox);
     turn_out = turn(gyroz, target_turn);
 
     PWM_out = vertical_out;
