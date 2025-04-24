@@ -5,15 +5,17 @@
 int target_speed = 0;
 int target_turn;
 
-float med_angle = 3.7; //平衡时角度值偏移量
+float med_angle = 1.5; //平衡时角度值偏移量
 
 //float vertical_kp = 43; // 0 - 100
 //float vertical_kd = 1.26 * 0.75; // 0 - 1
 //float velocity_kp = -0.015; // 0 - -0.01
-float vertical_kp = 95 * 0.6; // 0 - 100
-float vertical_kd = 2 * 0.6; // 0 - 1
-float velocity_kp = -0.035; // 0 - -0.01
-float velocity_ki; // velocity_kp / 200
+float vertical_kp = 125 * 0.6; // 0 - 100
+// float vertical_kd = 2 * 0.6; // 0 - 1
+// float velocity_kp = -0.035; // 0 - -0.01
+float vertical_kd = 2.4 * 0.6; // 0 - 1
+float velocity_kp = -0.037; // 0 - -0.01
+float velocity_ki = -0.000055; // velocity_kp / 200
 float turn_kp;
 float turn_kd;
 uint8_t stop;
@@ -30,7 +32,7 @@ float velocity(int target, int encoder_L, int encoder_R)
 {
     static int err_lowout_last, encoder_s;
     static float a = 0.7;
-    velocity_ki = velocity_kp / 100;
+    // velocity_ki = velocity_kp / 200;
     int err, err_lowout;
     //计算偏差值
     err = (encoder_L + encoder_R) / 2 - target;
@@ -40,7 +42,7 @@ float velocity(int target, int encoder_L, int encoder_R)
     //积分
     encoder_s += err_lowout;
     //积分限幅
-    encoder_s = encoder_s > 2000 ? 2000 : (encoder_s < (-2000) ? (-2000) : encoder_s);
+    encoder_s = encoder_s > 10000 ? 10000 : (encoder_s < (-10000) ? (-10000) : encoder_s);
     if (stop == 1)
     {
         encoder_s = 0;
@@ -72,5 +74,14 @@ void control(void)
     int motor0 = PWM_out - turn_out;
     int motor1 = PWM_out + turn_out;
 
-    Motor_SetSpeed(motor0, motor1);
+    if (roll>50 || roll<-50)
+    {
+        stop = 1;
+        Motor_Stop();
+    }
+    else
+    {
+        Motor_SetSpeed(motor0, motor1);
+    }
+
 }

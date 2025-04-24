@@ -2,6 +2,7 @@
 #define PID_H
 
 extern int target_speed;
+extern float med_angle;
 
 void control(void);
 
