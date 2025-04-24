@@ -58,7 +58,7 @@ const osThreadAttr_t Task_OLED_attributes = {
 osThreadId_t Task_CarControlHandle;
 const osThreadAttr_t Task_CarControl_attributes = {
   .name = "Task_CarControl",
-  .stack_size = 256 * 4,
+  .stack_size = 384 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for Task_SR04 */
@@ -66,6 +66,13 @@ osThreadId_t Task_SR04Handle;
 const osThreadAttr_t Task_SR04_attributes = {
   .name = "Task_SR04",
   .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for Task_Bluetooth */
+osThreadId_t Task_BluetoothHandle;
+const osThreadAttr_t Task_Bluetooth_attributes = {
+  .name = "Task_Bluetooth",
+  .stack_size = 384 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
@@ -77,6 +84,7 @@ const osThreadAttr_t Task_SR04_attributes = {
 void AppTask_OLED(void *argument);
 void AppTask_CarControl(void *argument);
 void AppTask_SR04(void *argument);
+void AppTask_Bluetooth(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -115,6 +123,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of Task_SR04 */
   Task_SR04Handle = osThreadNew(AppTask_SR04, NULL, &Task_SR04_attributes);
+
+  /* creation of Task_Bluetooth */
+  Task_BluetoothHandle = osThreadNew(AppTask_Bluetooth, NULL, &Task_Bluetooth_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -158,8 +169,9 @@ void AppTask_CarControl(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    mpu6500_getdata();
     control();
-    vTaskDelay(2);
+    vTaskDelay(5);
   }
   /* USER CODE END AppTask_CarControl */
 }
@@ -181,6 +193,25 @@ void AppTask_SR04(void *argument)
     vTaskDelay(300);
   }
   /* USER CODE END AppTask_SR04 */
+}
+
+/* USER CODE BEGIN Header_AppTask_Bluetooth */
+/**
+* @brief Function implementing the Task_Bluetooth thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_AppTask_Bluetooth */
+void AppTask_Bluetooth(void *argument)
+{
+  /* USER CODE BEGIN AppTask_Bluetooth */
+  /* Infinite loop */
+  for(;;)
+  {
+    uart_para_send();
+    vTaskDelay(50);
+  }
+  /* USER CODE END AppTask_Bluetooth */
 }
 
 /* Private application code --------------------------------------------------*/

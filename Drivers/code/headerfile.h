@@ -24,5 +24,10 @@
 #include "bsp_spi.h"
 #include "struct_typedef.h"
 #include "pid.h"
+#include "bluetooth.h"
+
+extern uint8_t rx_buffer[50];
+
+extern DMA_HandleTypeDef hdma_usart1_rx;
 
 #endif //HEADERFILE_H
