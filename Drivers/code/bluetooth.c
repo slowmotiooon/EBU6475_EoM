@@ -3,8 +3,8 @@
 void uart_para_send(void)
 {
     char str[50];
-    // sprintf(str, "%d,%d\n", target_speed, (speed_0 + speed_1)/2);
-    sprintf(str, "%.2f,%.2f\n", imu.rol, med_angle);
+    sprintf(str, "%d,%d\n", target_speed, (speed_0 + speed_1)/2);
+    // sprintf(str, "%.2f,%.2f\n", imu.rol, med_angle);
     HAL_UART_Transmit(&huart1, (uint8_t *)str, strlen(str), 50);
 }
 

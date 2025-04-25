@@ -20,9 +20,9 @@ void Motor_Init(void) {
 
 void speed_limit(uint32_t *speed)
 {
-    if (*speed > 839)
+    if (*speed > 780)
     {
-        *speed = 839;
+        *speed = 780;
     }
     if (*speed < 300)
     {

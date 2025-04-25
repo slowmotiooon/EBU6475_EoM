@@ -52,13 +52,13 @@ osThreadId_t Task_OLEDHandle;
 const osThreadAttr_t Task_OLED_attributes = {
   .name = "Task_OLED",
   .stack_size = 384 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityBelowNormal,
 };
 /* Definitions for Task_CarControl */
 osThreadId_t Task_CarControlHandle;
 const osThreadAttr_t Task_CarControl_attributes = {
   .name = "Task_CarControl",
-  .stack_size = 384 * 4,
+  .stack_size = 600 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for Task_SR04 */
@@ -169,9 +169,11 @@ void AppTask_CarControl(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    taskDISABLE_INTERRUPTS();
     mpu6500_getdata();
     control();
-    vTaskDelay(5);
+    taskENABLE_INTERRUPTS();
+    vTaskDelay(2);
   }
   /* USER CODE END AppTask_CarControl */
 }

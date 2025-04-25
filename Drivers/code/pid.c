@@ -2,20 +2,20 @@
 
 //临时pid
 
-int target_speed = 0;
+int target_speed = 300;
 int target_turn;
 
-float med_angle = 1.5; //平衡时角度值偏移量
+float med_angle = 3.2; //平衡时角度值偏移量
 
 //float vertical_kp = 43; // 0 - 100
 //float vertical_kd = 1.26 * 0.75; // 0 - 1
 //float velocity_kp = -0.015; // 0 - -0.01
-float vertical_kp = 125 * 0.6; // 0 - 100
+float vertical_kp = 115 * 0.6; // 0 - 100
 // float vertical_kd = 2 * 0.6; // 0 - 1
 // float velocity_kp = -0.035; // 0 - -0.01
-float vertical_kd = 2.4 * 0.6; // 0 - 1
-float velocity_kp = -0.037; // 0 - -0.01
-float velocity_ki = -0.000055; // velocity_kp / 200
+float vertical_kd = 2 * 0.6; // 0 - 1
+float velocity_kp = -0.023; // 0 - -0.01
+float velocity_ki = -0.000115; // velocity_kp / 200
 float turn_kp;
 float turn_kd;
 uint8_t stop;
