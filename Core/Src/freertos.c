@@ -169,11 +169,12 @@ void AppTask_CarControl(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    taskDISABLE_INTERRUPTS();
+    // taskDISABLE_INTERRUPTS();
     mpu6500_getdata();
+    GetSpeed();
     control();
-    taskENABLE_INTERRUPTS();
-    vTaskDelay(2);
+    // taskENABLE_INTERRUPTS();
+    vTaskDelay(5);
   }
   /* USER CODE END AppTask_CarControl */
 }

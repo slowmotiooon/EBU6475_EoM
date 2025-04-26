@@ -98,7 +98,6 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
-  MX_TIM4_Init();
   MX_TIM5_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
@@ -216,7 +215,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM4) {
-    GetSpeed();
+    // GetSpeed();
   }
   /* USER CODE END Callback 1 */
 }
