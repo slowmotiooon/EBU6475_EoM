@@ -70,8 +70,7 @@ void control(void) {
     int motor0 = PWM_out - turn_out;
     int motor1 = PWM_out + turn_out;
 
-    if (roll > 50 || roll < -50) {
-        stop = 1;
+    if (roll > 50 || roll < -50 || stop == 1) {
         Motor_Stop();
     } else {
         Motor_SetSpeed(motor0, motor1);

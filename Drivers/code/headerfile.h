@@ -25,6 +25,8 @@
 #include "struct_typedef.h"
 #include "pid.h"
 #include "bluetooth.h"
+#include "key.h"
+#include "knob.h"
 
 extern uint8_t rx_buffer[50];
 

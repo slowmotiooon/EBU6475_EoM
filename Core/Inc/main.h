@@ -59,14 +59,26 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define BLUE_STATE_Pin GPIO_PIN_13
 #define BLUE_STATE_GPIO_Port GPIOC
+#define knob3_Pin GPIO_PIN_0
+#define knob3_GPIO_Port GPIOC
 #define BUTTON4_Pin GPIO_PIN_2
 #define BUTTON4_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
+#define knob1_Pin GPIO_PIN_4
+#define knob1_GPIO_Port GPIOA
+#define knob2_Pin GPIO_PIN_1
+#define knob2_GPIO_Port GPIOB
 #define SPI_NS_Pin GPIO_PIN_10
 #define SPI_NS_GPIO_Port GPIOB
+#define Key1_Pin GPIO_PIN_13
+#define Key1_GPIO_Port GPIOB
+#define Key2_Pin GPIO_PIN_14
+#define Key2_GPIO_Port GPIOB
+#define Key3_Pin GPIO_PIN_15
+#define Key3_GPIO_Port GPIOB
 #define SR04_ECHO_Pin GPIO_PIN_11
 #define SR04_ECHO_GPIO_Port GPIOA
 #define SR04_ECHO_EXTI_IRQn EXTI15_10_IRQn

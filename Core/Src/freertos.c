@@ -75,6 +75,20 @@ const osThreadAttr_t Task_Bluetooth_attributes = {
   .stack_size = 384 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for Task_Key */
+osThreadId_t Task_KeyHandle;
+const osThreadAttr_t Task_Key_attributes = {
+  .name = "Task_Key",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
+/* Definitions for Task_Knob */
+osThreadId_t Task_KnobHandle;
+const osThreadAttr_t Task_Knob_attributes = {
+  .name = "Task_Knob",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -85,6 +99,8 @@ void AppTask_OLED(void *argument);
 void AppTask_CarControl(void *argument);
 void AppTask_SR04(void *argument);
 void AppTask_Bluetooth(void *argument);
+void AppTask_Key(void *argument);
+void AppTask_Knob(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -126,6 +142,12 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of Task_Bluetooth */
   Task_BluetoothHandle = osThreadNew(AppTask_Bluetooth, NULL, &Task_Bluetooth_attributes);
+
+  /* creation of Task_Key */
+  Task_KeyHandle = osThreadNew(AppTask_Key, NULL, &Task_Key_attributes);
+
+  /* creation of Task_Knob */
+  Task_KnobHandle = osThreadNew(AppTask_Knob, NULL, &Task_Knob_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -215,6 +237,45 @@ void AppTask_Bluetooth(void *argument)
     vTaskDelay(50);
   }
   /* USER CODE END AppTask_Bluetooth */
+}
+
+/* USER CODE BEGIN Header_AppTask_Key */
+/**
+* @brief Function implementing the Task_Key thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_AppTask_Key */
+void AppTask_Key(void *argument)
+{
+  /* USER CODE BEGIN AppTask_Key */
+  /* Infinite loop */
+  for(;;)
+  {
+    key_scan();
+    vTaskDelay(100);
+  }
+  /* USER CODE END AppTask_Key */
+}
+
+/* USER CODE BEGIN Header_AppTask_Knob */
+/**
+* @brief Function implementing the Task_Knob thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_AppTask_Knob */
+void AppTask_Knob(void *argument)
+{
+  /* USER CODE BEGIN AppTask_Knob */
+  /* Infinite loop */
+  for(;;)
+  {
+    get_adc();
+    set_adc();
+    vTaskDelay(100);
+  }
+  /* USER CODE END AppTask_Knob */
 }
 
 /* Private application code --------------------------------------------------*/
