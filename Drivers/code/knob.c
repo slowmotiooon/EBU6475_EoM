@@ -10,7 +10,7 @@ uint32_t adc3_value;
 uint32_t adc_value[3];
 
 void get_adc(void) {
-    HAL_ADC_Start_DMA(&hadc1, adc_value, sizeof(adc_value)/sizeof(uint32_t));
+    HAL_ADC_Start_DMA(&hadc1, adc_value, 3);
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
@@ -23,7 +23,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 }
 
 void set_speed(void) {
-    uint32_t speed;
-    speed = 600 * (adc1_value / 4096);
-    target_speed = speed;
+    float speed = 600 * ((float)adc1_value / 4096);
+    target_speed = (int)speed;
 }

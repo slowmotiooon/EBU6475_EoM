@@ -73,12 +73,6 @@ void Error_Handler(void);
 #define knob2_GPIO_Port GPIOB
 #define SPI_NS_Pin GPIO_PIN_10
 #define SPI_NS_GPIO_Port GPIOB
-#define Key1_Pin GPIO_PIN_13
-#define Key1_GPIO_Port GPIOB
-#define Key2_Pin GPIO_PIN_14
-#define Key2_GPIO_Port GPIOB
-#define Key3_Pin GPIO_PIN_15
-#define Key3_GPIO_Port GPIOB
 #define SR04_ECHO_Pin GPIO_PIN_11
 #define SR04_ECHO_GPIO_Port GPIOA
 #define SR04_ECHO_EXTI_IRQn EXTI15_10_IRQn

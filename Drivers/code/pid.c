@@ -19,7 +19,7 @@ float velocity_ki = 0; // velocity_kp / 200
 
 float turn_kp = 0;
 float turn_kd = -0.1;
-uint8_t stop;
+uint8_t stop = 0;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
 
@@ -44,7 +44,6 @@ float velocity(int target, int encoder_L, int encoder_R) {
     encoder_s = encoder_s > 30000 ? 30000 : (encoder_s < (-30000) ? (-30000) : encoder_s);
     if (stop == 1) {
         encoder_s = 0;
-        stop = 0;
     }
     //速度环计算
     float temp = velocity_kp * err_lowout + velocity_ki * encoder_s;

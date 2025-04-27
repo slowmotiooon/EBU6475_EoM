@@ -4,7 +4,8 @@ uint8_t message[50];
 extern int speed;
 
 void OLED_Update(void) {
-    sprintf((char *) message, "mot0:%d    ", speed_0);
+    sprintf((char *) message, "speed:%d    ", target_speed);
+    //printf((char *) message, "mot0:%d    ", speed_0);
     OLED_ShowString(1, 1, (char *) message);
     sprintf((char *) message, "mot1:%d    ", speed_1);
     OLED_ShowString(2, 1, (char *) message);

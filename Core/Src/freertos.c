@@ -272,7 +272,7 @@ void AppTask_Knob(void *argument)
   for(;;)
   {
     get_adc();
-    set_adc();
+    set_speed();
     vTaskDelay(100);
   }
   /* USER CODE END AppTask_Knob */
