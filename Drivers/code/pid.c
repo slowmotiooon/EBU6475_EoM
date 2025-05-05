@@ -2,14 +2,14 @@
 
 //临时pid
 
-int target_speed = 150;
-int target_turn;
+int target_speed = 0;
+int target_turn = 0;
 
-float med_angle = 3.0; //平衡时角度值偏移量
+float med_angle = 2.3; //平衡时角度值偏移量
 
-float vertical_kp = 210 * 0.6; // 0 - 100
-float vertical_kd = 1.45 * 0.6; // 0 - 1
-float velocity_kp = -0.035; // 0 - -0.01
+float vertical_kp = 320 * 0.6; // 0 - 100
+float vertical_kd = 1.6 * 0.6; // 0 - 1
+float velocity_kp = -0.017; // 0 - -0.01
 float velocity_ki = 0; // velocity_kp / 200
 
 // float vertical_kp = 0; // 0 - 100
@@ -17,8 +17,8 @@ float velocity_ki = 0; // velocity_kp / 200
 // float velocity_kp = 0; // 0 - -0.01
 // float velocity_ki = 0; // velocity_kp / 200
 
-float turn_kp = 0;
-float turn_kd = -0.1;
+float turn_kp = -2.5; /*-2.5*/
+float turn_kd = -0.4; /* *-0.3*/
 uint8_t stop = 0;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
@@ -74,4 +74,37 @@ void control(void) {
     } else {
         Motor_SetSpeed(motor0, motor1);
     }
+}
+
+void go_forward(void) {
+    for (int i = 1; i <= 30; i++) {
+        target_speed = i * 10;
+        vTaskDelay(10);
+    }
+}
+
+void go_backward(void) {
+    for (int i = -1; i >= -30; i--) {
+        target_speed = i * 10;
+        vTaskDelay(10);
+    }
+}
+
+void turn_left(void) {
+    target_turn = -100;
+}
+
+void turn_right(void) {
+    target_turn = 100;
+}
+
+void stop_car(void) {
+    for (int i = 29; i >= 0; i--) {
+        target_speed += target_speed > 0 ? -10 : 10;
+        vTaskDelay(10);
+    }
+}
+
+void turn_straight(void) {
+    target_turn = 0;
 }

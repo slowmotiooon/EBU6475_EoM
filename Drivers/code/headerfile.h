@@ -28,6 +28,10 @@
 #include "key.h"
 #include "knob.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
+
 extern uint8_t rx_buffer[50];
 
 extern DMA_HandleTypeDef hdma_usart1_rx;
