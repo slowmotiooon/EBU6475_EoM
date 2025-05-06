@@ -61,8 +61,8 @@ void Error_Handler(void);
 #define BLUE_STATE_GPIO_Port GPIOC
 #define knob3_Pin GPIO_PIN_0
 #define knob3_GPIO_Port GPIOC
-#define BUTTON4_Pin GPIO_PIN_2
-#define BUTTON4_GPIO_Port GPIOC
+#define BUTTON1_Pin GPIO_PIN_2
+#define BUTTON1_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
@@ -82,8 +82,8 @@ void Error_Handler(void);
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
-#define BUTTON1_Pin GPIO_PIN_10
-#define BUTTON1_GPIO_Port GPIOC
+#define BUTTON1C10_Pin GPIO_PIN_10
+#define BUTTON1C10_GPIO_Port GPIOC
 #define BUTTON3_Pin GPIO_PIN_11
 #define BUTTON3_GPIO_Port GPIOC
 #define BUTTON2_Pin GPIO_PIN_12

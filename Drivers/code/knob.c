@@ -22,6 +22,9 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 }
 
 void set_speed(void) {
-    // float speed = 600 * ((float)adc1_value / 4096);
-    // target_speed = (int)speed;
+    if (speed_lock == 1)
+    {
+        float speed = 600 * ((float)adc1_value / 4096);
+        target_speed = (int)speed;
+    }
 }

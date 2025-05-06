@@ -19,7 +19,7 @@ float velocity_ki = 0; // velocity_kp / 200
 
 float turn_kp = -2.5; /*-2.5*/
 float turn_kd = -0.4; /* *-0.3*/
-uint8_t stop = 0;
+uint8_t stop = 1;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
 

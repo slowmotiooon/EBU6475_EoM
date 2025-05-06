@@ -102,10 +102,11 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_ADC1_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   OLED_Init();
   mpu6500_init();
-  // HAL_TIM_Base_Start_IT(&htim4);
+  HAL_TIM_Base_Start_IT(&htim4);
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, sizeof(rx_buffer));
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
   Motor_Init();
@@ -215,7 +216,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM4) {
-    // GetSpeed();
+    show_mode = 0;
+    select_option = 1;
+    speed_lock = 0;
   }
   /* USER CODE END Callback 1 */
 }

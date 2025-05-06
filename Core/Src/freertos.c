@@ -51,7 +51,7 @@
 osThreadId_t Task_OLEDHandle;
 const osThreadAttr_t Task_OLED_attributes = {
   .name = "Task_OLED",
-  .stack_size = 384 * 4,
+  .stack_size = 400 * 4,
   .priority = (osPriority_t) osPriorityBelowNormal,
 };
 /* Definitions for Task_CarControl */
@@ -65,8 +65,8 @@ const osThreadAttr_t Task_CarControl_attributes = {
 osThreadId_t Task_SR04Handle;
 const osThreadAttr_t Task_SR04_attributes = {
   .name = "Task_SR04",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 300 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* Definitions for Task_Bluetooth */
 osThreadId_t Task_BluetoothHandle;
@@ -75,18 +75,11 @@ const osThreadAttr_t Task_Bluetooth_attributes = {
   .stack_size = 384 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for Task_Key */
-osThreadId_t Task_KeyHandle;
-const osThreadAttr_t Task_Key_attributes = {
-  .name = "Task_Key",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
 /* Definitions for Task_Knob */
 osThreadId_t Task_KnobHandle;
 const osThreadAttr_t Task_Knob_attributes = {
   .name = "Task_Knob",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
 
@@ -96,15 +89,9 @@ const osThreadAttr_t Task_Knob_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void AppTask_OLED(void *argument);
-
 void AppTask_CarControl(void *argument);
-
 void AppTask_SR04(void *argument);
-
 void AppTask_Bluetooth(void *argument);
-
-void AppTask_Key(void *argument);
-
 void AppTask_Knob(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -148,9 +135,6 @@ void MX_FREERTOS_Init(void) {
   /* creation of Task_Bluetooth */
   Task_BluetoothHandle = osThreadNew(AppTask_Bluetooth, NULL, &Task_Bluetooth_attributes);
 
-  /* creation of Task_Key */
-  Task_KeyHandle = osThreadNew(AppTask_Key, NULL, &Task_Key_attributes);
-
   /* creation of Task_Knob */
   Task_KnobHandle = osThreadNew(AppTask_Knob, NULL, &Task_Knob_attributes);
 
@@ -161,6 +145,7 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
+
 }
 
 /* USER CODE BEGIN Header_AppTask_OLED */
@@ -170,10 +155,12 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
 /* USER CODE END Header_AppTask_OLED */
-void AppTask_OLED(void *argument) {
+void AppTask_OLED(void *argument)
+{
   /* USER CODE BEGIN AppTask_OLED */
   /* Infinite loop */
   for (;;) {
+    key_scan();
     OLED_Update();
     vTaskDelay(100);
   }
@@ -187,15 +174,14 @@ void AppTask_OLED(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_CarControl */
-void AppTask_CarControl(void *argument) {
+void AppTask_CarControl(void *argument)
+{
   /* USER CODE BEGIN AppTask_CarControl */
   /* Infinite loop */
   for (;;) {
-    // taskDISABLE_INTERRUPTS();
     mpu6500_getdata();
     GetSpeed();
-    control();
-    // taskENABLE_INTERRUPTS();
+    // control();
     vTaskDelay(5);
   }
   /* USER CODE END AppTask_CarControl */
@@ -208,7 +194,8 @@ void AppTask_CarControl(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_SR04 */
-void AppTask_SR04(void *argument) {
+void AppTask_SR04(void *argument)
+{
   /* USER CODE BEGIN AppTask_SR04 */
   /* Infinite loop */
   for (;;) {
@@ -225,7 +212,8 @@ void AppTask_SR04(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_Bluetooth */
-void AppTask_Bluetooth(void *argument) {
+void AppTask_Bluetooth(void *argument)
+{
   /* USER CODE BEGIN AppTask_Bluetooth */
   /* Infinite loop */
   for (;;) {
@@ -264,23 +252,6 @@ void AppTask_Bluetooth(void *argument) {
   /* USER CODE END AppTask_Bluetooth */
 }
 
-/* USER CODE BEGIN Header_AppTask_Key */
-/**
-* @brief Function implementing the Task_Key thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_AppTask_Key */
-void AppTask_Key(void *argument) {
-  /* USER CODE BEGIN AppTask_Key */
-  /* Infinite loop */
-  for (;;) {
-    key_scan();
-    vTaskDelay(100);
-  }
-  /* USER CODE END AppTask_Key */
-}
-
 /* USER CODE BEGIN Header_AppTask_Knob */
 /**
 * @brief Function implementing the Task_Knob thread.
@@ -288,13 +259,14 @@ void AppTask_Key(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_Knob */
-void AppTask_Knob(void *argument) {
+void AppTask_Knob(void *argument)
+{
   /* USER CODE BEGIN AppTask_Knob */
   /* Infinite loop */
   for (;;) {
     get_adc();
     set_speed();
-    vTaskDelay(100);
+    vTaskDelay(50);
   }
   /* USER CODE END AppTask_Knob */
 }
