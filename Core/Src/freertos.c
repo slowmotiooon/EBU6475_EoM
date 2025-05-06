@@ -181,7 +181,7 @@ void AppTask_CarControl(void *argument)
   for (;;) {
     mpu6500_getdata();
     GetSpeed();
-    // control();
+    control();
     vTaskDelay(5);
   }
   /* USER CODE END AppTask_CarControl */
@@ -200,7 +200,7 @@ void AppTask_SR04(void *argument)
   /* Infinite loop */
   for (;;) {
     SR04_GetDistance();
-    vTaskDelay(300);
+    vTaskDelay(250);
   }
   /* USER CODE END AppTask_SR04 */
 }

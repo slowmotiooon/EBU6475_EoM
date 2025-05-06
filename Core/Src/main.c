@@ -104,7 +104,9 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+  HAL_Delay(100);
   OLED_Init();
+  HAL_Delay(100);
   mpu6500_init();
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, sizeof(rx_buffer));
