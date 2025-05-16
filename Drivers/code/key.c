@@ -45,9 +45,9 @@ void key_scan(void) {
         else if (show_mode == 1)
         {
             select_option++;
-            if (select_option >= 3)
+            if (select_option >= 4)
             {
-                select_option = 3;
+                select_option = 4;
             }
         }
     }
@@ -71,6 +71,10 @@ void key_scan(void) {
             else if (select_option == 3)
             {
                 show_mode = 4;
+            }
+            else if (select_option == 4)
+            {
+                show_mode = 5;
             }
         }
         else if (show_mode == 2)
