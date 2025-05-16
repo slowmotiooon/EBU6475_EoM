@@ -90,7 +90,7 @@ void MX_ADC1_Init(void)
 
   /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
   */
-  sConfig.Channel = ADC_CHANNEL_11;
+  sConfig.Channel = ADC_CHANNEL_13;
   sConfig.Rank = 4;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
@@ -119,7 +119,7 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**ADC1 GPIO Configuration
     PC0     ------> ADC1_IN10
-    PC1     ------> ADC1_IN11
+    PC3     ------> ADC1_IN13
     PA4     ------> ADC1_IN4
     PB1     ------> ADC1_IN9
     */
@@ -176,7 +176,7 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 
     /**ADC1 GPIO Configuration
     PC0     ------> ADC1_IN10
-    PC1     ------> ADC1_IN11
+    PC3     ------> ADC1_IN13
     PA4     ------> ADC1_IN4
     PB1     ------> ADC1_IN9
     */
