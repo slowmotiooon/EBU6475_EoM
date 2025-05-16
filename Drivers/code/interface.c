@@ -92,6 +92,7 @@ void oled_show(void) {
     }
     else if (show_mode == 5)
     {
+
         sprintf(message, "       PID   ");
         OLED_ShowString_big(1, 1, message);
         sprintf(message, "    ver_kp:%.2f   ", vertical_kp);
