@@ -9,6 +9,8 @@ uint32_t adc3_value;
 
 uint32_t adc_value[3];
 
+uint16_t battery;
+
 void get_adc(void) {
     HAL_ADC_Start_DMA(&hadc1, adc_value, 3);
 }
@@ -18,6 +20,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
         adc1_value = adc_value[0];
         adc2_value = adc_value[1];
         adc3_value = adc_value[2];
+
+        battery = adc2_value * 100 / 4095;
     }
 }
 
