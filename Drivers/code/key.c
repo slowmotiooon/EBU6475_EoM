@@ -29,10 +29,26 @@ void key_scan(void) {
                 show_mode = 0;
             }
         }
+        else if (show_mode == 4)
+        {
+            select_option--;
+            if (select_option == 0)
+            {
+                select_option = 4;
+                show_mode = 1;
+            }
+        }
         else
         {
             speed_lock = 0;
-            show_mode = 1;
+            if (show_mode == 2 || show_mode == 3 || show_mode == 5 || show_mode == 6)
+            {
+                show_mode = 1;
+            }
+            else if (show_mode == 7 ||  show_mode == 8)
+            {
+                show_mode = 4;
+            }
         }
     }
 
@@ -45,9 +61,18 @@ void key_scan(void) {
         else if (show_mode == 1)
         {
             select_option++;
-            if (select_option >= 4)
+            if (select_option >= 5)
             {
-                select_option = 4;
+                show_mode = 4;
+                select_option = 1;
+            }
+        }
+        else if (show_mode == 4)
+        {
+            select_option++;
+            if (select_option >= 2)
+            {
+                select_option = 2;
             }
         }
     }
@@ -70,11 +95,11 @@ void key_scan(void) {
             }
             else if (select_option == 3)
             {
-                show_mode = 4;
+                show_mode = 5;
             }
             else if (select_option == 4)
             {
-                show_mode = 5;
+                show_mode = 6;
             }
         }
         else if (show_mode == 2)
@@ -99,6 +124,17 @@ void key_scan(void) {
                 stop = 1;
             }
         }
+        else if (show_mode == 4)
+        {
+            if (select_option == 1)
+            {
+                show_mode = 7;
+            }
+            else if (select_option == 2)
+            {
+                show_mode = 8;
+            }
+        }
     }
 
     if (k4_state == 0 && k4_last_state == 1) {
@@ -113,7 +149,7 @@ void key_scan(void) {
                 stop = 0;   //运行
             }
         }
-        else if (show_mode == 1)
+        else if (show_mode == 1 || show_mode == 4)
         {
             stop = 1;
         }

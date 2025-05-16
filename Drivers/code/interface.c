@@ -3,7 +3,7 @@
 char message[20];
 // extern int speed;
 
-uint8_t show_mode; //0为默认数据界面，1为菜单，2为速度设置界面，3为电机设置界面，4为超声波设置界面，5为PID参数界面
+uint8_t show_mode; //0为默认数据界面，1为菜单，2为速度设置界面，3为电机设置界面，4为菜单第二栏，5为蓝牙界面，6为电量界面，7为超声波设置界面，8为PID参数界面
 uint8_t select_option = 1;
 
 void OLED_Update(void) {
@@ -24,9 +24,9 @@ void OLED_Update(void) {
         OLED_ShowString(1, 5, message);
         sprintf(message, "motor");
         OLED_ShowString(2, 5, message);
-        sprintf(message, "ultrasonic");
+        sprintf(message, "bluetooth");
         OLED_ShowString(3, 5, message);
-        sprintf(message, "pid");
+        sprintf(message, "battery");
         OLED_ShowString(4, 5, message);
 
         if (select_option == 1)
@@ -74,11 +74,52 @@ void OLED_Update(void) {
     }
     else if (show_mode == 4)
     {
+        sprintf(message, "ultrasonic");
+        OLED_ShowString(1, 5, message);
+        sprintf(message, "pid");
+        OLED_ShowString(2, 5, message);
+
+        if (select_option == 1)
+        {
+            sprintf(message, ">>");
+            OLED_ShowString(1, 2, message);
+        }
+        else if (select_option == 2)
+        {
+            sprintf(message, ">>");
+            OLED_ShowString(2, 2, message);
+        }
+    }
+    else if (show_mode == 5)
+    {
+        sprintf(message, "    BLUETOOTH ");
+        OLED_ShowString(1, 1, message);
+        if (bluetooth_state == 1)
+        {
+            sprintf(message,"    CONNECTED   ");
+            OLED_ShowString(3, 1, message);
+        }
+        else
+        {
+            sprintf(message,"  DISCONNECTED ");
+            OLED_ShowString(3, 1, message);
+        }
+
+    }
+    else if (show_mode == 6)
+    {
+        sprintf(message, "     BATTERY ");
+        OLED_ShowString(1, 1, message);
+        sprintf(message, "       %d%%  ", battery);
+        OLED_ShowString(3, 1, message);
+    }
+    else if (show_mode == 7)
+    {
         sprintf(message, "    ULTRASON ");
         OLED_ShowString(1, 1, message);
 
     }
-    else if (show_mode == 5)
+    else if (show_mode == 8)
     {
         // sprintf(message, "       PID   ");
         // OLED_ShowString(1, 1, message);
