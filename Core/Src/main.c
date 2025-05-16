@@ -108,6 +108,7 @@ int main(void)
   OLED_Init();
   HAL_Delay(100);
   mpu6500_init();
+  HAL_Delay(100);
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, sizeof(rx_buffer));
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);

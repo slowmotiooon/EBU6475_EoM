@@ -58,7 +58,7 @@ const osThreadAttr_t Task_OLED_attributes = {
 osThreadId_t Task_CarControlHandle;
 const osThreadAttr_t Task_CarControl_attributes = {
   .name = "Task_CarControl",
-  .stack_size = 500 * 4,
+  .stack_size = 400 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
 /* Definitions for Task_SR04 */
