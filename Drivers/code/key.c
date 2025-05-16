@@ -23,9 +23,10 @@ void key_scan(void) {
         else if (show_mode == 1)
         {
             select_option--;
-            if (select_option <= 0)
+            if (select_option == 0)
             {
                 select_option = 1;
+                show_mode = 0;
             }
         }
         else
@@ -44,9 +45,9 @@ void key_scan(void) {
         else if (show_mode == 1)
         {
             select_option++;
-            if (select_option >= 3)
+            if (select_option >= 4)
             {
-                select_option = 3;
+                select_option = 4;
             }
         }
     }
@@ -70,6 +71,10 @@ void key_scan(void) {
             else if (select_option == 3)
             {
                 show_mode = 4;
+            }
+            else if (select_option == 4)
+            {
+                show_mode = 5;
             }
         }
         else if (show_mode == 2)
@@ -97,7 +102,21 @@ void key_scan(void) {
     }
 
     if (k4_state == 0 && k4_last_state == 1) {
-        stop = 1;   //停止
+        if (show_mode == 0)
+        {
+            if (stop == 0)
+            {
+                stop = 1;   //停止
+            }
+            else
+            {
+                stop = 0;   //运行
+            }
+        }
+        else if (show_mode == 1)
+        {
+            stop = 1;
+        }
     }
 
     k1_last_state = k1_state;

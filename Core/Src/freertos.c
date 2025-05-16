@@ -217,36 +217,9 @@ void AppTask_Bluetooth(void *argument)
   /* USER CODE BEGIN AppTask_Bluetooth */
   /* Infinite loop */
   for (;;) {
-    uart_para_send();
-    if (command_received) {
-      if (rx_buffer[0] == 'c') {
-        if (rx_buffer[1] == 'f') go_forward();
-        else if (rx_buffer[1] == 'b') go_backward();
-        else if (rx_buffer[1] == 'l') turn_left();
-        else if (rx_buffer[1] == 'r') turn_right();
-        else if (rx_buffer[1] == 's') stop_car();
-        else if (rx_buffer[1] == 't') turn_straight();
-      } else if (rx_buffer[0] == 's') {
-        float *p = &med_angle;
-        float range = 0;
-        if (rx_buffer[1] == '1') p = &med_angle, range = 0.01;
-        else if (rx_buffer[1] == '2') p = &vertical_kp, range = 1;
-        else if (rx_buffer[1] == '3') p = &vertical_kd, range = 0.01;
-        else if (rx_buffer[1] == '4') p = &velocity_kp, range = 0.001;
-        else if (rx_buffer[1] == '5') p = &turn_kp, range = 0.01;
-        else if (rx_buffer[1] == '6') p = &turn_kd, range = 0.01;
-        if (rx_buffer[2] == 'u') *p += range;
-        else if (rx_buffer[2] == 'v') *p += range * 5;
-        else if (rx_buffer[2] == 'w') *p += range * 10;
-        else if (rx_buffer[2] == 'x') *p += range * 100;
-        else if (rx_buffer[2] == 'd') *p -= range;
-        else if (rx_buffer[2] == 'e') *p -= range * 5;
-        else if (rx_buffer[2] == 'f') *p -= range * 10;
-        else if (rx_buffer[2] == 'g') *p -= range * 100;
-        else if (rx_buffer[2] == 'r') *p = 0;
-      }
-      command_received = 0;
-    }
+    // uart_para_send();
+    bluetooth_control();
+    bluetooth_state_scan();
     vTaskDelay(50);
   }
   /* USER CODE END AppTask_Bluetooth */
