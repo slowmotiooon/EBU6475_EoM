@@ -64,12 +64,12 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SPI_NS_Pin OLED_SDA_Pin OLED_SCL_Pin */
-  GPIO_InitStruct.Pin = SPI_NS_Pin|OLED_SDA_Pin|OLED_SCL_Pin;
+  /*Configure GPIO pin : SPI_NS_Pin */
+  GPIO_InitStruct.Pin = SPI_NS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(SPI_NS_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : SR04_ECHO_Pin */
   GPIO_InitStruct.Pin = SR04_ECHO_Pin;
@@ -83,6 +83,13 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(SR04_TRIG_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : OLED_SDA_Pin OLED_SCL_Pin */
+  GPIO_InitStruct.Pin = OLED_SDA_Pin|OLED_SCL_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);

@@ -4,6 +4,6 @@
 extern uint8_t show_mode;
 extern uint8_t select_option;
 
-void OLED_Update(void);
+void oled_show(void);
 
 #endif //INTERFACE_H

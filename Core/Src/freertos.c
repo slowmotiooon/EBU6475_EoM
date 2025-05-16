@@ -161,7 +161,7 @@ void AppTask_OLED(void *argument)
   /* Infinite loop */
   for (;;) {
     key_scan();
-    OLED_Update();
+    oled_show();
     vTaskDelay(100);
   }
   /* USER CODE END AppTask_OLED */
