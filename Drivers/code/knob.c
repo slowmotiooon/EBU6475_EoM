@@ -6,11 +6,14 @@
 uint32_t adc1_value;
 uint32_t adc2_value;
 uint32_t adc3_value;
+uint32_t adc4_value;
 
-uint32_t adc_value[3];
+uint32_t adc_value[4];
+
+uint16_t battery;
 
 void get_adc(void) {
-    HAL_ADC_Start_DMA(&hadc1, adc_value, 3);
+    HAL_ADC_Start_DMA(&hadc1, adc_value, sizeof(adc_value));
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
@@ -18,6 +21,9 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
         adc1_value = adc_value[0];
         adc2_value = adc_value[1];
         adc3_value = adc_value[2];
+        adc4_value = adc_value[3];
+
+        battery = adc4_value * 100 / 4095;
     }
 }
 

@@ -691,6 +691,38 @@ void OLED_ShowString(int16_t X, int16_t Y, char *String, uint8_t FontSize)
 }
 
 /**
+  * 函    数：OLED显示字符串（使用行列坐标）
+  * 参    数：Row 指定行位置，范围：1~8
+  * 参    数：Column 指定列位置，范围：1~21
+  * 参    数：String 指定要显示的字符串
+  * 返 回 值：无
+  * 说    明：调用此函数后，要想真正地呈现在屏幕上，还需调用更新函数
+  */
+void OLED_ShowString_small(uint8_t Row, uint8_t Column, char *String)
+{
+    // 将行列坐标转换为像素坐标
+    // 行高为8像素，列宽为6像素
+    // 行列编号从1开始，像素坐标从0开始，需要减1再计算
+    int16_t X = (Column - 1) * 6;
+    int16_t Y = (Row - 1) * 8;
+
+    // 调用原始的OLED_ShowString函数，固定使用6*8字体
+    OLED_ShowString(X, Y, String, OLED_6X8);
+}
+
+void OLED_ShowString_big(uint8_t Row, uint8_t Column, char *String)
+{
+	// 将行列坐标转换为像素坐标
+	// 行高为8像素，列宽为6像素
+	// 行列编号从1开始，像素坐标从0开始，需要减1再计算
+	int16_t X = (Column - 1) * 8;
+	int16_t Y = (Row - 1) * 16;
+
+	// 调用原始的OLED_ShowString函数，固定使用8*16字体
+	OLED_ShowString(X, Y, String, OLED_8X16);
+}
+
+/**
   * 函    数：OLED显示数字（十进制，正整数）
   * 参    数：X 指定数字左上角的横坐标，范围：-32768~32767，屏幕区域：0~127
   * 参    数：Y 指定数字左上角的纵坐标，范围：-32768~32767，屏幕区域：0~63

@@ -6,6 +6,7 @@
 #define KNOB_H
 
 extern uint32_t adc1_value;
+extern uint16_t battery;
 
 void get_adc(void);
 void set_speed(void);

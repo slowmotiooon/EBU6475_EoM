@@ -61,6 +61,8 @@ void Error_Handler(void);
 #define BLUE_STATE_GPIO_Port GPIOC
 #define knob3_Pin GPIO_PIN_0
 #define knob3_GPIO_Port GPIOC
+#define battery_Pin GPIO_PIN_1
+#define battery_GPIO_Port GPIOC
 #define BUTTON1_Pin GPIO_PIN_2
 #define BUTTON1_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
