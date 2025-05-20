@@ -131,6 +131,7 @@ void OLED_Update(void) {
         OLED_ShowString(3, 1, message);
         sprintf(message, "  vel_ki:%.4f  ", velocity_ki);
         OLED_ShowString(4, 1, message);
+
     }
     else if (show_mode == 9)
     {
