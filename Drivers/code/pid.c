@@ -50,19 +50,28 @@ float velocity(int target, int encoder_L, int encoder_R) {
     return temp;
 }
 
-float turn(int gyro_z, int target_turn) {
-    float temp = turn_kp * target_turn + turn_kd * gyro_z;
+// float turn(float gyro_z, int target_turn) {
+//     float temp = turn_kp * target_turn + turn_kd * gyro_z;
+//     return temp;
+// }
+
+float turn(int target_turn, float yaw, float gyro_z) {
+    float temp = turn_kp * (yaw - target_turn) + turn_kd * gyro_z;
     return temp;
 }
 
 void control(void) {
-    float roll = imu.rol;
-    short gyrox = mpu_data.gx;
-    short gyroz = mpu_data.gz;
+    // float roll = imu.rol;
+    // short gyrox = mpu_data.gx;
+    // short gyroz = mpu_data.gz;
+    float roll = Roll;
+    float gyrox = Gx;
+    float gyroz = Gz;
+    float yaw = Yaw;
 
     velocity_out = velocity(target_speed, speed_0, speed_1);
     vertical_out = vertical(velocity_out + med_angle, roll, gyrox);
-    turn_out = turn(gyroz, target_turn);
+    turn_out = turn(target_turn, yaw, gyroz);
 
     PWM_out = vertical_out;
 

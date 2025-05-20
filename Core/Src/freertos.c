@@ -179,7 +179,7 @@ void AppTask_CarControl(void *argument)
   /* USER CODE BEGIN AppTask_CarControl */
   /* Infinite loop */
   for (;;) {
-    mpu6500_getdata();
+    // mpu6500_getdata();
     GetSpeed();
     control();
     vTaskDelay(5);
