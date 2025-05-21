@@ -7,6 +7,7 @@
 int k1_state, k2_state, k3_state, k4_state, k1_last_state, k2_last_state, k3_last_state, k4_last_state;
 
 uint8_t speed_lock;
+uint8_t barrier_distance_lock;
 
 void key_scan(void) {
     k1_state = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2);
@@ -38,6 +39,16 @@ void key_scan(void) {
                 show_mode = 1;
             }
         }
+        else if (show_mode == 7)
+        {
+            select_barrier_option --;
+            if (select_barrier_option == 0)
+            {
+                show_mode = 4;
+                select_barrier_option = 1;
+                barrier_distance_lock = 0;
+            }
+        }
         else
         {
             speed_lock = 0;
@@ -45,7 +56,7 @@ void key_scan(void) {
             {
                 show_mode = 1;
             }
-            else if (show_mode == 7 ||  show_mode == 8)
+            else if (show_mode == 8)
             {
                 show_mode = 4;
             }
@@ -73,6 +84,14 @@ void key_scan(void) {
             if (select_option >= 2)
             {
                 select_option = 2;
+            }
+        }
+        else if (show_mode == 7)
+        {
+            select_barrier_option ++;
+            if (select_barrier_option == 3)
+            {
+                select_barrier_option = 2;
             }
         }
     }
@@ -129,10 +148,36 @@ void key_scan(void) {
             if (select_option == 1)
             {
                 show_mode = 7;
+                select_barrier_option = 1;
             }
             else if (select_option == 2)
             {
                 show_mode = 8;
+            }
+        }
+        else if (show_mode == 7)
+        {
+            if (select_barrier_option == 1)
+            {
+                if (barrier_state == 1)
+                {
+                    barrier_state = 0;
+                }
+                else
+                {
+                    barrier_state = 1;
+                }
+            }
+            else if (select_barrier_option == 2)
+            {
+                if (barrier_distance_lock == 1)
+                {
+                    barrier_distance_lock = 0;
+                }
+                else
+                {
+                    barrier_distance_lock = 1;
+                }
             }
         }
     }

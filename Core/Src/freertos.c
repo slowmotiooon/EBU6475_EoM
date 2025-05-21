@@ -201,6 +201,7 @@ void AppTask_SR04(void *argument) {
   /* Infinite loop */
   for (;;) {
     SR04_GetDistance();
+    barrier();
     vTaskDelay(250);
   }
   /* USER CODE END AppTask_SR04 */

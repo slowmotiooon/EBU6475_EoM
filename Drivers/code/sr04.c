@@ -5,6 +5,10 @@
 uint16_t count;
 float distance;
 
+uint8_t barrier_state;
+uint16_t barrier_distance = 20;
+uint8_t barrier_flag = 0;
+
 void Delay_us(__IO uint32_t delay) {
     int last, curr, val;
     int temp;
@@ -42,6 +46,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
             HAL_TIM_Base_Stop(&htim5);
             count = __HAL_TIM_GET_COUNTER(&htim5);
             distance = (float) count / 1000000 * 346 * 100 / 2;
+        }
+    }
+}
+
+void barrier(void)
+{
+    if (barrier_state == 1)
+    {
+        if (distance < barrier_distance)
+        {
+            target_speed = -50;
+            barrier_flag = 1;
         }
     }
 }

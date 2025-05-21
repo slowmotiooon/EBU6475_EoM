@@ -22,6 +22,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
         adc3_value = adc_value[2];
 
         battery = adc2_value * 100 / 4095;
+
+        if (barrier_distance_lock == 1)
+        {
+            barrier_distance = adc3_value * 120 / 4095;
+        }
     }
 }
 

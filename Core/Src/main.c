@@ -214,12 +214,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   }
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM4) {
-    if (show_mode != 0) {
-      // OLED_Clear();
+
+    if (speed_lock != 1 && barrier_distance_lock != 1)
+    {
+      show_mode = 0;
+      select_option = 1;
+      if (show_mode != 0) {
+        OLED_Clear();
+      }
     }
-    // show_mode = 0;
-    select_option = 1;
-    speed_lock = 0;
+
+    if (barrier_flag == 1)
+    {
+      target_speed = 0;
+      barrier_flag = 0;
+    }
   }
   /* USER CODE END Callback 1 */
 }
