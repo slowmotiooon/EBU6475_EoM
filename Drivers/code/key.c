@@ -138,7 +138,7 @@ void key_scan(void) {
     }
 
     if (k4_state == 0 && k4_last_state == 1) {
-        if (show_mode == 0)
+        if (show_mode == 0 || show_mode == 9)
         {
             if (stop == 0)
             {
@@ -149,7 +149,7 @@ void key_scan(void) {
                 stop = 0;   //运行
             }
         }
-        else if (show_mode == 1 || show_mode == 4)
+        else if (show_mode == 1 || show_mode == 4 )
         {
             stop = 1;
         }

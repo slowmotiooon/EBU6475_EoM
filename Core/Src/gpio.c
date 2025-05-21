@@ -51,7 +51,14 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, SPI_NS_Pin|SR04_TRIG_Pin|OLED_SDA_Pin|OLED_SCL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, A2_Pin|B1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(A1_GPIO_Port, A1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, B2_Pin|SPI_NS_Pin|ST_Pin|SR04_TRIG_Pin
+                          |OLED_SDA_Pin|OLED_SCL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : BLUE_STATE_Pin */
   GPIO_InitStruct.Pin = BLUE_STATE_Pin;
@@ -65,8 +72,22 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SPI_NS_Pin SR04_TRIG_Pin */
-  GPIO_InitStruct.Pin = SPI_NS_Pin|SR04_TRIG_Pin;
+  /*Configure GPIO pins : A2_Pin B1_Pin */
+  GPIO_InitStruct.Pin = A2_Pin|B1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : A1_Pin */
+  GPIO_InitStruct.Pin = A1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(A1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : B2_Pin SPI_NS_Pin ST_Pin SR04_TRIG_Pin */
+  GPIO_InitStruct.Pin = B2_Pin|SPI_NS_Pin|ST_Pin|SR04_TRIG_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

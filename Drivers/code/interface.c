@@ -145,4 +145,11 @@ void OLED_Update(void) {
         OLED_ShowString(4, 1, message);
 
     }
+    else if (show_mode == 10)
+    {
+        sprintf(message, "speed0:%d   ", speed_0);
+        OLED_ShowString(1, 1, message);
+        sprintf(message, "speed1:%d   ", speed_1);
+        OLED_ShowString(2, 1, message);
+    }
 }
