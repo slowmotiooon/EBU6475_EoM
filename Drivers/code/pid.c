@@ -10,15 +10,15 @@ float med_angle = 1.25; //平衡时角度值偏移量
 float vertical_kp = 60 * 0.6; // 0 - 100
 float vertical_kd = 3.5 * 0.6; // 0 - 1
 float velocity_kp = -0.01; // 0 - -0.01
-float velocity_ki = 0; // velocity_kp / 200
+float velocity_ki; // velocity_kp / 200
 
 // float vertical_kp = 0; // 0 - 100
 // float vertical_kd = 0; // 0 - 1
 // float velocity_kp = 0; // 0 - -0.01
 // float velocity_ki = 0; // velocity_kp / 200
 
-float turn_kp = 0; /*-2.5*/
-float turn_kd = 0; /* *-0.3*/
+float turn_kp = -1.5; /*-2.5*/
+float turn_kd = -0.6; /* *-0.3*/
 uint8_t stop = 1;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
@@ -41,7 +41,7 @@ float velocity(int target, int encoder_L, int encoder_R) {
     //积分
     encoder_s += err_lowout;
     //积分限幅
-    encoder_s = encoder_s > 30000 ? 30000 : (encoder_s < (-30000) ? (-30000) : encoder_s);
+    encoder_s = encoder_s > 10000 ? 10000 : (encoder_s < (-10000) ? (-10000) : encoder_s);
     if (stop == 1) {
         encoder_s = 0;
     }
@@ -101,11 +101,11 @@ void go_backward(void) {
 }
 
 void turn_left(void) {
-    target_turn = -100;
+    target_turn += 10;
 }
 
 void turn_right(void) {
-    target_turn = 100;
+    target_turn -= 10;
 }
 
 void stop_car(void) {
@@ -113,8 +113,4 @@ void stop_car(void) {
         target_speed += target_speed > 0 ? -10 : 10;
         vTaskDelay(10);
     }
-}
-
-void turn_straight(void) {
-    target_turn = 0;
 }

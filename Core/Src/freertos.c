@@ -217,7 +217,7 @@ void AppTask_Bluetooth(void *argument) {
   /* USER CODE BEGIN AppTask_Bluetooth */
   /* Infinite loop */
   for (;;) {
-    uart_para_send();
+    // uart_para_send();
     bluetooth_control();
     bluetooth_state_scan();
     vTaskDelay(50);

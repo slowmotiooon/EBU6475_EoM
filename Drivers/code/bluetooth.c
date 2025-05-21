@@ -10,13 +10,11 @@ void uart_para_send(void) {
     HAL_UART_Transmit(&huart1, (uint8_t *) str, strlen(str), 50);
 }
 
-void bluetooth_state_scan(void)
-{
+void bluetooth_state_scan(void) {
     bluetooth_state = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
 }
 
-void bluetooth_control(void)
-{
+void bluetooth_control(void) {
     if (command_received) {
         if (rx_buffer[0] == 'c') {
             if (rx_buffer[1] == 'f') go_forward();
@@ -24,7 +22,6 @@ void bluetooth_control(void)
             else if (rx_buffer[1] == 'l') turn_left();
             else if (rx_buffer[1] == 'r') turn_right();
             else if (rx_buffer[1] == 's') stop_car();
-            else if (rx_buffer[1] == 't') turn_straight();
         } else if (rx_buffer[0] == 's') {
             float *p = &med_angle;
             float range = 0;
