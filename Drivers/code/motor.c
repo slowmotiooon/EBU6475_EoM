@@ -39,8 +39,8 @@ void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
         }
     } else {
         if (direction == BACKWARD) {
-            HAL_GPIO_WritePin(B1_GPIO_Port, B1_Pin, GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(B2_GPIO_Port, B2_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(B1_GPIO_Port, B1_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(B2_GPIO_Port, B2_Pin, GPIO_PIN_RESET);
         } else {
             HAL_GPIO_WritePin(B1_GPIO_Port, B1_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(B2_GPIO_Port, B2_Pin, GPIO_PIN_SET);
@@ -48,8 +48,7 @@ void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
     }
 }
 
-void Motor_Start(void)
-{
+void Motor_Start(void) {
     HAL_GPIO_WritePin(ST_GPIO_Port, ST_Pin, GPIO_PIN_SET);
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);

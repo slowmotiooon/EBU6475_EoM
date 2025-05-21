@@ -89,9 +89,13 @@ const osThreadAttr_t Task_Knob_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void AppTask_OLED(void *argument);
+
 void AppTask_CarControl(void *argument);
+
 void AppTask_SR04(void *argument);
+
 void AppTask_Bluetooth(void *argument);
+
 void AppTask_Knob(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -145,7 +149,6 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
-
 }
 
 /* USER CODE BEGIN Header_AppTask_OLED */
@@ -155,8 +158,7 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
 /* USER CODE END Header_AppTask_OLED */
-void AppTask_OLED(void *argument)
-{
+void AppTask_OLED(void *argument) {
   /* USER CODE BEGIN AppTask_OLED */
   /* Infinite loop */
   for (;;) {
@@ -174,8 +176,7 @@ void AppTask_OLED(void *argument)
 * @retval None
 */
 /* USER CODE END Header_AppTask_CarControl */
-void AppTask_CarControl(void *argument)
-{
+void AppTask_CarControl(void *argument) {
   /* USER CODE BEGIN AppTask_CarControl */
   /* Infinite loop */
   for (;;) {
@@ -183,7 +184,7 @@ void AppTask_CarControl(void *argument)
     GetSpeed();
     control();
     // Motor_SetSpeed(100, 100);
-    vTaskDelay(5);
+    vTaskDelay(10);
   }
   /* USER CODE END AppTask_CarControl */
 }
@@ -195,8 +196,7 @@ void AppTask_CarControl(void *argument)
 * @retval None
 */
 /* USER CODE END Header_AppTask_SR04 */
-void AppTask_SR04(void *argument)
-{
+void AppTask_SR04(void *argument) {
   /* USER CODE BEGIN AppTask_SR04 */
   /* Infinite loop */
   for (;;) {
@@ -213,12 +213,11 @@ void AppTask_SR04(void *argument)
 * @retval None
 */
 /* USER CODE END Header_AppTask_Bluetooth */
-void AppTask_Bluetooth(void *argument)
-{
+void AppTask_Bluetooth(void *argument) {
   /* USER CODE BEGIN AppTask_Bluetooth */
   /* Infinite loop */
   for (;;) {
-    // uart_para_send();
+    uart_para_send();
     bluetooth_control();
     bluetooth_state_scan();
     vTaskDelay(50);
@@ -233,8 +232,7 @@ void AppTask_Bluetooth(void *argument)
 * @retval None
 */
 /* USER CODE END Header_AppTask_Knob */
-void AppTask_Knob(void *argument)
-{
+void AppTask_Knob(void *argument) {
   /* USER CODE BEGIN AppTask_Knob */
   /* Infinite loop */
   for (;;) {
