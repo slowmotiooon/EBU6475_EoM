@@ -7,11 +7,9 @@ int32_t speed_0 = 0;
 int32_t speed_1 = 0;
 
 void Motor_Init(void) {
-    HAL_GPIO_WritePin(ST_GPIO_Port, ST_Pin, GPIO_PIN_SET);
     Motor_SetDirection(LEFT_WHEEL, FORWARD);
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
     Motor_SetDirection(RIGHT_WHEEL, FORWARD);
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+    Motor_Start();
     HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
     HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 }
@@ -48,6 +46,13 @@ void Motor_SetDirection(const uint8_t wheel, const uint8_t direction) {
             HAL_GPIO_WritePin(B2_GPIO_Port, B2_Pin, GPIO_PIN_SET);
         }
     }
+}
+
+void Motor_Start(void)
+{
+    HAL_GPIO_WritePin(ST_GPIO_Port, ST_Pin, GPIO_PIN_SET);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
 }
 
 void Motor_Stop(void) {

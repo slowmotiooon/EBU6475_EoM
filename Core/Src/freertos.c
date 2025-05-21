@@ -182,6 +182,7 @@ void AppTask_CarControl(void *argument)
     // mpu6500_getdata();
     GetSpeed();
     control();
+    // Motor_SetSpeed(100, 100);
     vTaskDelay(5);
   }
   /* USER CODE END AppTask_CarControl */

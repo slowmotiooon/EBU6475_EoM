@@ -139,7 +139,7 @@ void OLED_Update(void) {
         OLED_ShowString(1, 1, message);
         sprintf(message, "gx:%.2f   ", Gx);
         OLED_ShowString(2, 1, message);
-        sprintf(message, "gz:%.2f   ", Gz);
+        sprintf(message, "stop:%d   ", stop);
         OLED_ShowString(3, 1, message);
         sprintf(message, "yaw:%.2f   ", Yaw);
         OLED_ShowString(4, 1, message);

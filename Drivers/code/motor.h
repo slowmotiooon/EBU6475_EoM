@@ -23,6 +23,8 @@ void Motor_SetSpeed(int32_t speed0, int32_t speed1);
 
 void Motor_SetDirection(const uint8_t wheel, const uint8_t direction);
 
+void Motor_Start(void);
+
 void Motor_Stop(void);
 
 #endif //MOTOR_H
