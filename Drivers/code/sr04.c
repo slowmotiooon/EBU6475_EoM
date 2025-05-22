@@ -6,9 +6,10 @@ uint16_t count;
 float distance;
 
 uint8_t barrier_state = 0;
-uint16_t barrier_distance = 40;
+uint16_t barrier_distance = 20;
 uint8_t barrier_flag = 0;
 uint8_t go_forward_flag = 0;
+uint8_t go_backward_flag = 0;
 
 void Delay_us(__IO uint32_t delay) {
     int last, curr, val;
@@ -40,8 +41,8 @@ void SR04_GetDistance() {
 
 void obsAvoid(void) {
     if (distance < barrier_distance) {
-        stop_car();
-        turn_left();
+        go_backward_flag = 1;
+        turn_big_left();
         barrier_flag = 1;
         HAL_TIM_Base_Start_IT(&htim10);
     }

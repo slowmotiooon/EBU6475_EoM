@@ -270,8 +270,15 @@ void AppTask_ObsAvoid(void *argument)
   for(;;)
   {
     if (go_forward_flag == 1) {
-      go_forward();
+      for (int i = -1; i >= -10; i--) {
+        target_speed = i * 10;
+        vTaskDelay(10);
+      }
       go_forward_flag = 0;
+    }
+    if (go_backward_flag == 1) {
+      go_backward();
+      go_backward_flag = 0;
     }
     if (barrier_state == 1 && barrier_flag == 0) {
       obsAvoid();

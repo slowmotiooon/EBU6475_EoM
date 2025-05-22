@@ -111,7 +111,7 @@ void go_backward(void) {
 }
 
 void turn_left(void) {
-    int target_increment = 90; // 目标增加的角度
+    int target_increment = 20; // 目标增加的角度
     int step = 5; // 每次增加的步长
     for (int i = 0; i <= target_increment; i += step) {
         target_turn += step;
@@ -120,6 +120,24 @@ void turn_left(void) {
 }
 
 void turn_right(void) {
+    int target_increment = 20; // 目标减少的角度
+    int step = 5; // 每次减少的步长
+    for (int i = 0; i <= target_increment; i += step) {
+        target_turn -= step;
+        vTaskDelay(10); // 延迟以实现平滑过渡
+    }
+}
+
+void turn_big_left(void) {
+    int target_increment = 90; // 目标增加的角度
+    int step = 5; // 每次增加的步长
+    for (int i = 0; i <= target_increment; i += step) {
+        target_turn += step;
+        vTaskDelay(10); // 延迟以实现平滑过渡
+    }
+}
+
+void turn_big_right(void) {
     int target_increment = 90; // 目标减少的角度
     int step = 5; // 每次减少的步长
     for (int i = 0; i <= target_increment; i += step) {

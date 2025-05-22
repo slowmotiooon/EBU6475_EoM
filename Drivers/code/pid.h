@@ -22,7 +22,11 @@ void go_backward(void);
 
 void turn_left(void);
 
+void turn_big_left(void);
+
 void turn_right(void);
+
+void turn_big_right(void);
 
 void stop_car(void);
 
