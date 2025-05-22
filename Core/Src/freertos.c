@@ -273,7 +273,7 @@ void AppTask_ObsAvoid(void *argument)
       go_forward();
       go_forward_flag = 0;
     }
-    if (barrier_flag == 0) {
+    if (barrier_state == 1 && barrier_flag == 0) {
       obsAvoid();
     }
     vTaskDelay(100);

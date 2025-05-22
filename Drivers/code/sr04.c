@@ -5,7 +5,7 @@
 uint16_t count;
 float distance;
 
-uint8_t barrier_state;
+uint8_t barrier_state = 0;
 uint16_t barrier_distance = 40;
 uint8_t barrier_flag = 0;
 uint8_t go_forward_flag = 0;
