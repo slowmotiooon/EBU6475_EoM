@@ -16,10 +16,10 @@ void OLED_Update(void) {
         OLED_ShowString(2, 1, message);
         sprintf(message, "stop:%d", stop);
         OLED_ShowString(2, 10, message);
-        sprintf(message, "roll:%.1f  ", Roll);
+        sprintf(message, "rol:%.0f ", Roll);
         OLED_ShowString(3, 1, message);
-        sprintf(message, "yaw:%.0f  ", Yaw);
-        OLED_ShowString(3, 10, message);
+        sprintf(message, "ya:%.0f ", Yaw);
+        OLED_ShowString(3, 9, message);
         sprintf(message, "  distance:%.1f  ", distance);
         OLED_ShowString(4, 1, message);
     }
