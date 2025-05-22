@@ -14,7 +14,7 @@ void OLED_Update(void) {
         OLED_ShowString(1, 1, message);
         sprintf(message, "speed:%d  ", target_speed);
         OLED_ShowString(2, 1, message);
-        sprintf(message, "stop:%d", stop);
+        sprintf(message, "bar:%d", barrier_state);
         OLED_ShowString(2, 10, message);
         sprintf(message, "rol:%.0f ", Roll);
         OLED_ShowString(3, 1, message);

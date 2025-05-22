@@ -270,7 +270,7 @@ void AppTask_ObsAvoid(void *argument)
   for(;;)
   {
     if (go_forward_flag == 1) {
-      for (int i = -1; i >= -10; i--) {
+      for (int i = 1; i <= 10; i++) {
         target_speed = i * 10;
         vTaskDelay(10);
       }

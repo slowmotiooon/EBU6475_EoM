@@ -235,7 +235,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       barrier_flag++;
     }
     else {
-      go_forward_flag = 1;
+      target_speed = 0;
       barrier_flag = 0;
       HAL_TIM_Base_Stop_IT(&htim10);
     }
