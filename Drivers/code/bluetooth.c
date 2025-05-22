@@ -22,6 +22,14 @@ void bluetooth_control(void) {
             else if (rx_buffer[1] == 'l') turn_left();
             else if (rx_buffer[1] == 'r') turn_right();
             else if (rx_buffer[1] == 's') stop_car();
+            else if (rx_buffer[1] == 't') {
+                if (barrier_state == 0) {
+                    barrier_state = 1;
+                }
+                else {
+                    barrier_state = 0;
+                }
+            }
         } else if (rx_buffer[0] == 's') {
             float *p = &med_angle;
             float range = 0;
