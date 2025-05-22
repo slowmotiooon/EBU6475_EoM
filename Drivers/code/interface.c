@@ -12,11 +12,11 @@ void OLED_Update(void) {
     {
         sprintf(message, "      DATA   ");
         OLED_ShowString(1, 1, message);
-        sprintf(message, "  speed:%d   ", target_speed);
+        sprintf(message, "  en1:%d   ", speed_0);
         OLED_ShowString(2, 1, message);
-        sprintf(message, "  distance:%.1f  ", distance);
+        sprintf(message, "  en2:%d  ", speed_1);
         OLED_ShowString(3, 1, message);
-        sprintf(message, "  roll:%.1f  ", Roll);
+        sprintf(message, "  stop:%d  ", stop);
         OLED_ShowString(4, 1, message);
     }
     else if (show_mode == 1)

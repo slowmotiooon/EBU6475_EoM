@@ -12,6 +12,7 @@ extern float velocity_kp;
 extern float velocity_ki;
 extern float turn_kp;
 extern float turn_kd;
+extern float Bias;
 
 void control(void);
 

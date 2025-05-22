@@ -11,6 +11,7 @@ float vertical_kp = 60 * 0.6; // 0 - 100
 float vertical_kd = 3.5 * 0.6; // 0 - 1
 float velocity_kp = -0.01; // 0 - -0.01
 float velocity_ki; // velocity_kp / 200
+float Bias = 0;
 
 // float vertical_kp = 0; // 0 - 100
 // float vertical_kd = 0; // 0 - 1
@@ -18,7 +19,7 @@ float velocity_ki; // velocity_kp / 200
 // float velocity_ki = 0; // velocity_kp / 200
 
 float turn_kp = -1.5; /*-2.5*/
-float turn_kd = -0.6; /* *-0.3*/
+float turn_kd = -0.3; /* *-0.3*/
 uint8_t stop = 1;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
@@ -56,7 +57,16 @@ float velocity(int target, int encoder_L, int encoder_R) {
 // }
 
 float turn(int target_turn, float yaw, float gyro_z) {
-    float temp = turn_kp * (yaw - target_turn) + turn_kd * gyro_z;
+    if(abs(target_turn - yaw) < 360 - abs(target_turn - yaw)){
+        Bias = target_turn - yaw;
+    }
+    else{
+        Bias = 360 - abs(target_turn - yaw);
+        if(target_turn - yaw > 0)
+            Bias *= -1;
+    }
+    Bias *= -1;
+    float temp = turn_kp * Bias + turn_kd * gyro_z;
     return temp;
 }
 
@@ -101,11 +111,21 @@ void go_backward(void) {
 }
 
 void turn_left(void) {
-    target_turn += 10;
+    int target_increment = 90; // 目标增加的角度
+    int step = 5; // 每次增加的步长
+    for (int i = 0; i <= target_increment; i += step) {
+        target_turn += step;
+        vTaskDelay(10); // 延迟以实现平滑过渡
+    }
 }
 
 void turn_right(void) {
-    target_turn -= 10;
+    int target_increment = 90; // 目标减少的角度
+    int step = 5; // 每次减少的步长
+    for (int i = 0; i <= target_increment; i += step) {
+        target_turn -= step;
+        vTaskDelay(10); // 延迟以实现平滑过渡
+    }
 }
 
 void stop_car(void) {

@@ -82,6 +82,13 @@ const osThreadAttr_t Task_Knob_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for Taks_ObsAvoid */
+osThreadId_t Taks_ObsAvoidHandle;
+const osThreadAttr_t Taks_ObsAvoid_attributes = {
+  .name = "Taks_ObsAvoid",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -89,14 +96,11 @@ const osThreadAttr_t Task_Knob_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void AppTask_OLED(void *argument);
-
 void AppTask_CarControl(void *argument);
-
 void AppTask_SR04(void *argument);
-
 void AppTask_Bluetooth(void *argument);
-
 void AppTask_Knob(void *argument);
+void AppTask_ObsAvoid(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -142,6 +146,9 @@ void MX_FREERTOS_Init(void) {
   /* creation of Task_Knob */
   Task_KnobHandle = osThreadNew(AppTask_Knob, NULL, &Task_Knob_attributes);
 
+  /* creation of Taks_ObsAvoid */
+  Taks_ObsAvoidHandle = osThreadNew(AppTask_ObsAvoid, NULL, &Taks_ObsAvoid_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -149,6 +156,7 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
+
 }
 
 /* USER CODE BEGIN Header_AppTask_OLED */
@@ -158,7 +166,8 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
 /* USER CODE END Header_AppTask_OLED */
-void AppTask_OLED(void *argument) {
+void AppTask_OLED(void *argument)
+{
   /* USER CODE BEGIN AppTask_OLED */
   /* Infinite loop */
   for (;;) {
@@ -176,7 +185,8 @@ void AppTask_OLED(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_CarControl */
-void AppTask_CarControl(void *argument) {
+void AppTask_CarControl(void *argument)
+{
   /* USER CODE BEGIN AppTask_CarControl */
   /* Infinite loop */
   for (;;) {
@@ -196,12 +206,12 @@ void AppTask_CarControl(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_SR04 */
-void AppTask_SR04(void *argument) {
+void AppTask_SR04(void *argument)
+{
   /* USER CODE BEGIN AppTask_SR04 */
   /* Infinite loop */
   for (;;) {
     SR04_GetDistance();
-    barrier();
     vTaskDelay(250);
   }
   /* USER CODE END AppTask_SR04 */
@@ -214,7 +224,8 @@ void AppTask_SR04(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_Bluetooth */
-void AppTask_Bluetooth(void *argument) {
+void AppTask_Bluetooth(void *argument)
+{
   /* USER CODE BEGIN AppTask_Bluetooth */
   /* Infinite loop */
   for (;;) {
@@ -233,7 +244,8 @@ void AppTask_Bluetooth(void *argument) {
 * @retval None
 */
 /* USER CODE END Header_AppTask_Knob */
-void AppTask_Knob(void *argument) {
+void AppTask_Knob(void *argument)
+{
   /* USER CODE BEGIN AppTask_Knob */
   /* Infinite loop */
   for (;;) {
@@ -242,6 +254,31 @@ void AppTask_Knob(void *argument) {
     vTaskDelay(50);
   }
   /* USER CODE END AppTask_Knob */
+}
+
+/* USER CODE BEGIN Header_AppTask_ObsAvoid */
+/**
+* @brief Function implementing the Taks_ObsAvoid thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_AppTask_ObsAvoid */
+void AppTask_ObsAvoid(void *argument)
+{
+  /* USER CODE BEGIN AppTask_ObsAvoid */
+  /* Infinite loop */
+  for(;;)
+  {
+    if (go_forward_flag == 1) {
+      go_forward();
+      go_forward_flag = 0;
+    }
+    if (barrier_flag == 0) {
+      obsAvoid();
+    }
+    vTaskDelay(100);
+  }
+  /* USER CODE END AppTask_ObsAvoid */
 }
 
 /* Private application code --------------------------------------------------*/
