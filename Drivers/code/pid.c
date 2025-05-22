@@ -20,7 +20,7 @@ float Bias = 0;
 
 float turn_kp = -1.5; /*-2.5*/
 float turn_kd = -0.3; /* *-0.3*/
-uint8_t stop = 1;
+uint8_t stop = 0;
 
 float velocity_out, vertical_out, turn_out, PWM_out;
 
