@@ -173,7 +173,7 @@ void AppTask_OLED(void *argument)
   for (;;) {
     key_scan();
     OLED_Update();
-    vTaskDelay(100);
+    vTaskDelay(200);
   }
   /* USER CODE END AppTask_OLED */
 }
@@ -212,7 +212,7 @@ void AppTask_SR04(void *argument)
   /* Infinite loop */
   for (;;) {
     SR04_GetDistance();
-    vTaskDelay(250);
+    vTaskDelay(300);
   }
   /* USER CODE END AppTask_SR04 */
 }
@@ -269,20 +269,7 @@ void AppTask_ObsAvoid(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    if (go_forward_flag == 1) {
-      for (int i = 1; i <= 10; i++) {
-        target_speed = i * 10;
-        vTaskDelay(10);
-      }
-      go_forward_flag = 0;
-    }
-    if (go_backward_flag == 1) {
-      go_backward();
-      go_backward_flag = 0;
-    }
-    if (barrier_state == 1 && barrier_flag == 0) {
-      obsAvoid();
-    }
+    barrier();
     vTaskDelay(100);
   }
   /* USER CODE END AppTask_ObsAvoid */

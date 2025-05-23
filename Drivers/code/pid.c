@@ -57,10 +57,10 @@ float velocity(int target, int encoder_L, int encoder_R) {
 // }
 
 float turn(int target_turn, float yaw, float gyro_z) {
-    if(abs(target_turn - yaw) < 360 - abs(target_turn - yaw)){
+    if(abs(target_turn - yaw) < 360 - abs(target_turn - yaw)) {
         Bias = target_turn - yaw;
     }
-    else{
+    else {
         Bias = 360 - abs(target_turn - yaw);
         if(target_turn - yaw > 0)
             Bias *= -1;

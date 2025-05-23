@@ -8,7 +8,7 @@ float distance;
 uint8_t barrier_state = 0;
 uint16_t barrier_distance = 20;
 uint8_t barrier_flag = 0;
-uint8_t go_forward_flag = 0;
+// uint8_t go_forward_flag = 0;
 uint8_t go_backward_flag = 0;
 
 void Delay_us(__IO uint32_t delay) {
@@ -45,6 +45,29 @@ void obsAvoid(void) {
         turn_big_left();
         barrier_flag = 1;
         HAL_TIM_Base_Start_IT(&htim10);
+    }
+}
+
+void barrier(void)
+{
+    // if (go_forward_flag == 1) {
+    //     for (int i = 1; i <= 10; i++) {
+    //         target_speed = i * 10;
+    //         vTaskDelay(10);
+    //     }
+    //     go_forward_flag = 0;
+    // }
+
+    if (go_backward_flag == 1) {
+        for (int i = -1; i >= -30; i--) {
+            target_speed = i * 10;
+            vTaskDelay(10);
+        }
+        go_backward_flag = 0;
+    }
+
+    if (barrier_state == 1 && barrier_flag == 0) {
+        obsAvoid();
     }
 }
 
