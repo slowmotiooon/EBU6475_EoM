@@ -27,7 +27,7 @@
 #include "bluetooth.h"
 #include "key.h"
 #include "knob.h"
-#include "jy61p.h"
+#include "lala.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
