@@ -4,3 +4,5 @@
 /cmake-build-debug-mingw_stm32_dev/
 /.idea/
 /Debug/
+/EBU6475_EoM DAP.cfg
+/EBU6475_EoM DAP.launch

@@ -12,6 +12,10 @@ void uart_para_send(void) {
 
 void bluetooth_state_scan(void) {
     bluetooth_state = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
+    if (bluetooth_state == 0)
+    {
+        target_speed = 0;
+    }
 }
 
 void bluetooth_control(void) {
