@@ -231,14 +231,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
 
   if (htim->Instance == TIM10) {
-    if (barrier_flag == 1) {
-      barrier_flag++;
-    }
-    else {
-      target_speed = 0;
-      barrier_flag = 0;
-      HAL_TIM_Base_Stop_IT(&htim10);
-    }
+
   }
   /* USER CODE END Callback 1 */
 }

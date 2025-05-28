@@ -7,9 +7,6 @@ float distance;
 
 uint8_t barrier_state = 0;
 uint16_t barrier_distance = 20;
-uint8_t barrier_flag = 0;
-// uint8_t go_forward_flag = 0;
-uint8_t go_backward_flag = 0;
 
 void Delay_us(__IO uint32_t delay) {
     int last, curr, val;
@@ -39,15 +36,6 @@ void SR04_GetDistance() {
     HAL_GPIO_WritePin(SR04_TRIG_GPIO_Port, SR04_TRIG_Pin, GPIO_PIN_RESET);
 }
 
-void obsAvoid(void) {
-    if (distance < barrier_distance) {
-        go_backward_flag = 1;
-        turn_big_left();
-        barrier_flag = 1;
-        HAL_TIM_Base_Start_IT(&htim10);
-    }
-}
-
 void barrier(void)
 {
     // if (go_forward_flag == 1) {
@@ -58,16 +46,24 @@ void barrier(void)
     //     go_forward_flag = 0;
     // }
 
-    if (go_backward_flag == 1) {
-        for (int i = -1; i >= -30; i--) {
-            target_speed = i * 10;
-            vTaskDelay(10);
-        }
-        go_backward_flag = 0;
-    }
+    // if (go_backward_flag == 1) {
+    //     for (int i = 29; i >= 0; i--) {
+    //         target_speed += target_speed > 0 ? -10 : 10;
+    //         target_turn -= 3;
+    //         vTaskDelay(10);
+    //     }
+    //     go_backward_flag = 0;
+    // }
 
-    if (barrier_state == 1 && barrier_flag == 0) {
-        obsAvoid();
+    if (barrier_state == 1) {
+        if (distance < barrier_distance) {
+            stop_car();
+            vTaskDelay(500);
+            turn_speed = 20;
+            vTaskDelay(7000);
+            go_forward();
+            turn_speed = 0;
+        }
     }
 }
 

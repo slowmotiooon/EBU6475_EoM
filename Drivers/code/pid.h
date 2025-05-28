@@ -4,6 +4,7 @@
 extern int target_speed;
 extern float med_angle;
 extern int target_turn;
+extern int turn_speed;
 extern uint8_t stop;
 
 extern float vertical_kp;

@@ -24,8 +24,6 @@ void bluetooth_control(void) {
             if (rx_buffer[1] == 'f') go_forward();
             else if (rx_buffer[1] == 'b') go_backward();
             else if (rx_buffer[1] == 'l') turn_left();
-            else if (rx_buffer[1] == 'm') turn_big_left();
-            else if (rx_buffer[1] == 'n') turn_big_right();
             else if (rx_buffer[1] == 'r') turn_right();
             else if (rx_buffer[1] == 's') stop_car();
             else if (rx_buffer[1] == 't') {
