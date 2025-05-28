@@ -28,6 +28,7 @@
 #include "key.h"
 #include "knob.h"
 #include "lala.h"
+#include "abnormal_spin.h"
 
 #include "FreeRTOS.h"
 #include "task.h"

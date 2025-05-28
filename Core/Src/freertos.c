@@ -89,6 +89,13 @@ const osThreadAttr_t Taks_ObsAvoid_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for Task_Abnormal */
+osThreadId_t Task_AbnormalHandle;
+const osThreadAttr_t Task_Abnormal_attributes = {
+  .name = "Task_Abnormal",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -101,6 +108,7 @@ void AppTask_SR04(void *argument);
 void AppTask_Bluetooth(void *argument);
 void AppTask_Knob(void *argument);
 void AppTask_ObsAvoid(void *argument);
+void AppTask_AbnormalDetect(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -148,6 +156,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of Taks_ObsAvoid */
   Taks_ObsAvoidHandle = osThreadNew(AppTask_ObsAvoid, NULL, &Taks_ObsAvoid_attributes);
+
+  /* creation of Task_Abnormal */
+  Task_AbnormalHandle = osThreadNew(AppTask_AbnormalDetect, NULL, &Task_Abnormal_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -267,12 +278,33 @@ void AppTask_ObsAvoid(void *argument)
 {
   /* USER CODE BEGIN AppTask_ObsAvoid */
   /* Infinite loop */
-  for(;;)
-  {
-    barrier();
+  for(;;) {
+  barrier();
     vTaskDelay(100);
   }
   /* USER CODE END AppTask_ObsAvoid */
+}
+
+/* USER CODE BEGIN Header_AppTask_AbnormalDetect */
+/**
+* @brief Function implementing the Task_Abnormal thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_AppTask_AbnormalDetect */
+void AppTask_AbnormalDetect(void *argument)
+{
+  /* USER CODE BEGIN AppTask_AbnormalDetect */
+  int8_t states[4] = {0,0,0,0};
+
+  /* Infinite loop */
+  for(uint8_t i=0;;i=(i+1)%4)
+  {
+    states[i] = getAbnormalState();
+    if (states[0] && states[1] && states[2] && states[3]) stop = 1;
+    vTaskDelay(80);
+  }
+  /* USER CODE END AppTask_AbnormalDetect */
 }
 
 /* Private application code --------------------------------------------------*/

@@ -15,6 +15,8 @@ extern float turn_kp;
 extern float turn_kd;
 extern float Bias;
 
+extern float PWM_out;
+
 void control(void);
 
 void go_forward(void);
