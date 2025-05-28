@@ -6,7 +6,7 @@ int target_speed = 0;
 int target_turn = 0;
 int turn_speed = 0;
 
-float med_angle = 1.25; //平衡时角度值偏移量
+float med_angle = 1.75; //平衡时角度值偏移量
 
 float vertical_kp = 56 * 0.6; // 0 - 100
 float vertical_kd = 3.5 * 0.6; // 0 - 1
