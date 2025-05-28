@@ -171,7 +171,6 @@ void AppTask_OLED(void *argument)
   /* USER CODE BEGIN AppTask_OLED */
   /* Infinite loop */
   for (;;) {
-    key_scan();
     OLED_Update();
     vTaskDelay(200);
   }
@@ -249,6 +248,7 @@ void AppTask_Knob(void *argument)
   /* USER CODE BEGIN AppTask_Knob */
   /* Infinite loop */
   for (;;) {
+    key_scan();
     get_adc();
     set_speed();
     vTaskDelay(50);
