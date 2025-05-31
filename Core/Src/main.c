@@ -107,7 +107,7 @@ int main(void)
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
   OLED_Init();
-  // mpu6500_init();
+  mpu6500_init();
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buffer, sizeof(rx_buffer));
   HAL_UART_Receive_IT(&huart6, &uart6_receive, 1);

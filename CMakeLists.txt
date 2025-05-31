@@ -1,7 +1,7 @@
 #此文件从模板自动生成! 请勿更改!
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 4.0)
 
 # specify cross-compilers and tools
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
@@ -11,6 +11,15 @@ set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP arm-none-eabi-objdump)
 set(SIZE arm-none-eabi-size)
+
+#set(toolsPath /opt/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin)
+#set(CMAKE_C_COMPILER ${toolsPath}/arm-none-eabi-gcc)
+#set(CMAKE_CXX_COMPILER ${toolsPath}/arm-none-eabi-g++)
+#set(CMAKE_ASM_COMPILER ${toolsPath}/arm-none-eabi-gcc)
+#set(CMAKE_AR  ${toolsPath}/arm-none-eabi-ar)
+#set(CMAKE_OBJCOPY  ${toolsPath}/arm-none-eabi-objcopy)
+#set(CMAKE_OBJDUMP  ${toolsPath}/arm-none-eabi-objdump)
+
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # project settings
